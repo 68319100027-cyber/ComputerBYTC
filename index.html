@@ -7,9 +7,124 @@
   <meta name="description" content="เว็บไซต์แผนกวิชาคอมพิวเตอร์ วิทยาลัยเทคนิคบัวใหญ่">
 <meta name="keywords" content="แผนกวิชาคอมพิวเตอร์ วิทยาลัยเทคนิคบัวใหญ่, BYTC, Computer BYTC">
 <meta name="google-site-verification" content="Gx_DoKNFLOVL2-SUCdhML0CF9_AN3uXY_WGwB4QQFog" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo.png">
 
 <style>
+
+  /* ===== Responsive Fix Mobile ===== */
+
+*{
+    box-sizing: border-box;
+}
+
+html, body{
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* รูปภาพไม่ล้น */
+img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* วิดีโอไม่ล้น */
+video{
+    max-width: 100%;
+    height: auto;
+}
+
+/* container กลางเว็บ */
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* ปุ่มกดง่ายขึ้น */
+button{
+    cursor: pointer;
+}
+
+/* ===== มือถือ ===== */
+
+@media (max-width: 768px){
+
+    /* ลดข้อความใหญ่ */
+    h1{
+        font-size: 32px !important;
+        line-height: 1.2;
+    }
+
+    h2{
+        font-size: 26px !important;
+    }
+
+    h3{
+        font-size: 22px !important;
+    }
+
+    p{
+        font-size: 16px !important;
+    }
+
+    /* flex แนวนอน -> ลงแนวตั้ง */
+    .flex,
+    .row,
+    .container,
+    .content,
+    .box{
+        flex-direction: column !important;
+    }
+
+    /* กัน element ล้นจอ */
+    div,
+    section,
+    article{
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* ปุ่มเต็มจอ */
+    button,
+    .btn{
+        width: 100%;
+    }
+
+    /* spacing */
+    section{
+        padding: 30px 15px !important;
+    }
+
+    /* เมนู */
+    nav{
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    /* ตัวหนังสือกลาง */
+    .text,
+    .title,
+    .hero{
+        text-align: center !important;
+    }
+
+    /* ยกเลิก position ที่ทำเว็บพัง */
+    .absolute,
+    .card,
+    .image,
+    .hero-image{
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+    }
+
+}
   
     html, body{
   overflow-x:hidden;
