@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Map Buai Yai Tech</title>
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <link rel="icon" type="image/png" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+/* ===== FONT ===== */
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Light.woff2') format('woff2');
+font-weight:300;
+}
+
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Bold.woff2') format('woff2');
+font-weight:700;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'FCVision',sans-serif;
+}
+        body { margin: 0; padding: 0; font-family: 'Kanit', sans-serif; overflow: hidden; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        
+        /* ปรับแผงควบคุมมาไว้ด้านล่าง */
+        .control-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .college-name { color: #800000; font-weight: bold; margin: 0; font-size: 1.1rem; }
+        #distance-info { font-weight: bold; color: #333; background: #eee; padding: 4px 12px; border-radius: 10px; font-size: 0.9rem; }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        button { 
+            flex: 1;
+            padding: 12px 5px;
+            border: none;
+            border-radius: 12px;
+            background: #800000;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        button:hover { background: #5e0000; transform: translateY(-2px); }
+        button.nav-btn { background: #4285F4; }
+        button.nav-btn:hover { background: #3367D6; }
+
+        /* ปรับแต่ง Marker ให้สวยขึ้น */
+        .marker-label { background: white; padding: 2px 8px; border-radius: 5px; border: 1px solid #800000; font-size: 12px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+<div id="header"></div>
+
+<div id="map"></div>
+
+<div class="control-panel">
+    <div class="info-header">
+        <p class="college-name">วิทยาลัยเทคนิคบัวใหญ่</p>
+        <div id="distance-info">คำนวณระยะทาง...</div>
+    </div>
+    <div class="button-group">
+        <button onclick="flyToCollege()">ซูมลง 3D</button>
+        <button onclick="enterFirstPerson()">มุมมองคนเดิน</button>
+        <button class="nav-btn" onclick="openNav()">นำทางจริง</button>
+    </div>
+</div>
+
+<script>
+    fetch("components/header.html")
+.then(res => res.text())
+.then(data => {
+
+document.getElementById("header").innerHTML = data;
+
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", function(){
+
+if(!header) return;
+
+if(window.scrollY > 10){
+header.classList.add("active");
+}else{
+header.classList.remove("active");
+}
+
+});
+
+})
+.catch(error => console.error(error));
+  // พิกัดคุณ (ที่ส่งมา)
+    const myLocation = [102.4047017, 15.5595031]; 
+    // พิกัดวิทยาลัย (จุดศูนย์กลางกลุ่มอาคาร)
+    const collegeCoords = [102.4047017, 15.5595031]; 
+
+    const map = new maplibregl.Map({
+        container: 'map',
+        style: {
+            "version": 8,
+            "sources": {
+                "google-satellite": {
+                    "type": "raster",
+                    "tiles": [
+                        // ใช้ Google Satellite Hybrid (เสถียรและชัดที่สุดในไทย)
+                        "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
+                    ],
+                    "tileSize": 256,
+                    "attribution": "© Google Maps"
+                }
+            },
+            "layers": [
+                {
+                    "id": "google-layer",
+                    "type": "raster",
+                    "source": "google-satellite",
+                    "minzoom": 0,
+                    "maxzoom": 22 // รองรับการซูมได้ลึกมาก
+                }
+            ]
+        },
+        center: collegeCoords,
+        zoom: 16,
+        pitch: 0,
+        antialias: true
+    });
+
+    // Marker และฟังก์ชันอื่นๆ (เหมือนเดิม)
+    new maplibregl.Marker({ color: "#800000" }).setLngLat(collegeCoords).addTo(map);
+    new maplibregl.Marker({ color: "#4285F4" }).setLngLat(myLocation).addTo(map);
+
+    map.on('load', calculateDistance);
+
+    function calculateDistance() {
+        const from = turf.point(myLocation);
+        const to = turf.point(collegeCoords);
+        const distance = turf.distance(from, to, {units: 'kilometers'});
+        document.getElementById('distance-info').innerText = `${distance.toFixed(2)} กม.`;
+    }
+
+    function flyToCollege() {
+        map.flyTo({
+            center: collegeCoords,
+            zoom: 18.5, // ซูมลึกขึ้น
+            pitch: 65,
+            bearing: -10,
+            duration: 3000
+        });
+    }
+
+    function enterFirstPerson() {
+        map.easeTo({
+            center: collegeCoords,
+            pitch: 85,
+            zoom: 20, // ซูมระดับถนน
+            duration: 2500
+        });
+    }
+
+    function openNav() {
+        window.open(`https://www.google.com/maps/dir/?api=1&origin=${myLocation[1]},${myLocation[0]}&destination=${collegeCoords[1]},${collegeCoords[0]}`, '_blank');
+    }
+</script>
+</body>
+</html>

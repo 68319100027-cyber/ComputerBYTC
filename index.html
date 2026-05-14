@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนกวิชาคอมพิวเตอร์ วิทยาลัยเทคนิคบัวใหญ่</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+
+<style>
+  
+    html, body{
+  overflow-x:hidden;
+}
+
+/* ===== LOAD FONTS ===== */
+@font-face {
+  font-family: 'FCVision';
+  src: url('fonts/FCVision-Light.woff2') format('woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'FCVision';
+  src: url('fonts/FCVision-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'ImpactCustom';
+  src: url('fonts/impact.ttf') format('truetype');
+}
+
+/* ===== COLOR SYSTEM ===== */
+:root{
+  --primary:#fc92e9;
+  --primary-dark:#f76fdc;
+  --primary-soft:#fde6f9;
+  --bg:#f9f9fb;
+  --text:#333;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'FCVision', sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ===== HEADER ===== */
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+  background:#fff;
+  height: 80px;
+  padding:15px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 20px rgba(252,146,233,0.15);
+  border-top:4px solid var(--primary);
+  transition:0.3s ease;
+}
+
+
+
+/* โลโก้ฝั่งซ้าย */
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.logo-img{
+  height:55px;
+  width:auto;
+}
+
+.logo-text h1{
+  font-size:18px;
+  font-weight:700;
+  margin:0;
+  color:#000000;
+}
+
+.logo-text span{
+  font-size:13px;
+  color:#666;
+}
+.logo h1{
+  font-weight:700;
+  font-size:20px;
+}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:35px;
+  align-items:center;
+}
+
+nav ul li{
+  position:relative;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  transition:0.3s;
+  padding:5px 0;
+  position:relative;
+}
+
+/* underline */
+nav ul li a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:0.3s;
+}
+
+nav ul li a:hover{
+  color:var(--primary);
+}
+
+nav ul li a:hover::after{
+  width:100%;
+}
+
+/* ===== DROPDOWN FIX ===== */
+nav ul li{
+  position:relative;
+}
+
+.dropdown{
+  position:absolute;
+  top:100%;          /* ชิดปุ่มจริง ๆ */
+  left: -20px;;
+  margin-top:10px;   /* เว้นระยะด้วย margin */
+  background:#fff;
+  min-width:230px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  overflow:hidden;
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(10px);
+  transition:0.25s ease;
+}
+
+/* แสดงผล */
+nav ul li:hover .dropdown{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.dropdown a{
+  display:block;
+  padding:12px 18px;
+  font-size:14px;
+}
+
+.dropdown a:hover{
+  background:var(--primary-soft);
+}
+
+nav ul li:hover .dropdown{
+  display:block;
+}
+
+.container{
+  max-width:1500px;
+  margin:0 auto;   /* อยู่กลางเสมอ */
+}
+
+.text-wrapper{
+  margin:60px 0;
+}
+
+/* ===== HERO ===== */
+.hero{
+  height:550px;
+  width:100%;
+  background:url("https://lh3.googleusercontent.com/d/1LupLBaqnVU9efwxWoXmhZobpdOvFjeC4") center center/cover no-repeat;
+  position:relative;
+  overflow:hidden;   /* สำคัญ */
+  top: 80px;
+}
+
+.floating-logo{
+  position:absolute;
+  top:25px;     /* ปรับตำแหน่งได้ */
+  left:80px;     /* ปรับซ้ายขวาได้ */
+  width:600px;   /* ขนาดโลโก้ */
+
+  animation:float 4s ease-in-out infinite;
+}
+
+/* ทำให้ลอยขึ้นลง */
+@keyframes float{
+  0%   { transform:translateY(0px); }
+  50%  { transform:translateY(-20px); }
+  100% { transform:translateY(0px); }
+}
+
+.hero-content{
+  position:absolute;
+  bottom:70px;   /* คุมระยะจากล่าง */
+  left:110px;     /* คุมระยะจากซ้าย */
+  transform:none;
+  text-align:left;
+}
+
+.hero h2{
+  font-size:30px;
+  font-weight:800;            
+  margin-bottom:10px;
+  color:#ffffff;
+}
+
+.hero span{
+  font-family:'ImpactCustom';
+  color:var(--primary);
+}
+
+.hero p{
+  color:#ffffff;
+  margin-bottom:20px;
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:800;
+  background:#d34da0; 
+  color:#ffffff;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-3px);
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+  background: #111;
+  color: white;
+  padding: 60px 0;
+  margin-top: 100px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.footer-column h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-column a {
+  color: #a3a3a3;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+
+.footer-column a:hover {
+  color: rgb(255, 255, 255);
+  padding-left: 5px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  header{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav ul{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+  }
+}
+.text-wrapper{
+  width:100%;
+  padding-left:10px;
+  padding-right:40px;
+  margin:60px auto 0;
+  color: #000000;
+}
+
+/* TEXT SECTION */
+.text-section{
+  text-align:left !important;
+  padding:0;          /* 👈 ลองตัด padding ออกก่อน */
+}
+.text-section h1 {
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+.text-section p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* SLIDER (บน) */
+.slider2{
+  position: relative;
+  max-width:1500px;
+  width:100%;
+  aspect-ratio:3/1;
+  top: 40px;
+  margin:-35px auto  auto;   /* 👈 ทำให้กลาง */
+
+  overflow:hidden;
+}
+.slides2{display:flex;height:100%;transition:transform .8s ease}
+.slide2{min-width:100%;position:relative}
+.slide2 img{width:100%;height:100%;object-fit:cover}
+.slide2::after{
+  content:"";position:absolute;top:-70%;left:-140%;
+  width:28%;height:260%;pointer-events:none;
+  background:
+    radial-gradient(ellipse at center,rgba(255,255,255,.65) 0%,rgba(255,255,255,.28) 30%,rgba(255,255,255,.08) 55%,transparent 72%),
+    linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);
+  transform:rotate(18deg);filter:blur(12px);opacity:.85;
+  animation:lightSweep 5s linear infinite;
+}
+@keyframes lightSweep{from{left:-150%}to{left:150%}}
+
+
+
+.promo-section{
+  max-width:1500px;
+  margin:20px auto;
+  padding:0 20px;
+}
+
+.promo-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:20px;
+}
+
+/* แถวปกติ (ตัวเขียวด้านบน) */
+.promo-row .promo-text{
+  flex:1;
+  text-align:right;        /* ชิดขวา */
+}
+
+.promo-row .promo-text h2{
+  font-size:35px;          /* ขยายหัวข้อ */
+  margin-bottom:10px;
+  font-weight:800;
+  color: #003566;
+}
+
+.promo-row .promo-text p{
+  font-size:15px;          /* ขยายเนื้อหา */
+  line-height:2;
+}
+
+/* แถว reverse (ตัวฟ้าด้านล่าง) */
+.promo-row.reverse{
+  flex-direction:row-reverse;
+}
+
+.promo-row.reverse .promo-text{
+  text-align:left;         /* บังคับให้ชิดซ้าย */
+}
+
+.promo-image{
+  flex:1;
+  aspect-ratio:16/9;
+  overflow:hidden;
+}
+
+.promo-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Responsive */
+@media(max-width:1000px){
+  .promo-row,
+  .promo-row.reverse{
+    flex-direction:column;
+  }
+
+  .promo-text{
+    text-align:left; /* มือถือให้อ่านง่าย */
+  }
+
+  .promo-image{
+    width:100%;
+  }
+}
+
+.menu-icons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 80px 50px 60px; /* 👈 เพิ่ม padding บน */
+  margin-top: 40px;         /* 👈 ดันลงอีก */
+  background: #f3f3f3;
+  flex-wrap: wrap;
+}
+
+.menu-item {
+  font-weight: 900 !important;
+  display: flex;
+  flex-direction: column;   /* 👈 ทำให้เรียงบน-ล่าง */
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  transition: 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-6px);
+}
+
+.menu-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+/* POSTER ROW */
+.poster-row{
+  max-width:1500px;
+  margin:40px auto 80px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:30px;
+}
+.poster-card{
+  width:100%;
+  aspect-ratio:2/3;
+  height:auto;
+}
+.poster-card img{width:100%;height:100%;object-fit:cover;display:block}
+.poster-card:hover{
+  transform:translateY(-6px) scale(1.05);
+  box-shadow:0 18px 40px rgba(0,0,0,.55);
+}
+
+/* === SLIDER ล่าง === */
+.slider-section{
+  position:relative;
+  margin-top:-30px;
+}
+.slider-container{
+  position:relative;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;      /* 👈 จัดกลาง */
+  overflow:hidden;
+}
+.slider-track{
+  display:flex;
+  transition:transform .8s ease;
+}
+
+.slider-container .slide{
+  flex:0 0 100%;
+}
+.slider-container .slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.slider-dots{
+  position:absolute;
+  bottom:14px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  z-index:10;
+}
+.slider-dots span{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#555;
+  transition:.3s;
+}
+.slider-dots span.active{
+  background:#00e0ff;
+}
+
+
+
+
+/* ===== ล็อคการ scroll + คลิกทุกอย่าง ===== */
+.popup-lock {
+  overflow: hidden;
+}
+
+/* บล็อค pointer ทั้งเว็บ */
+.popup-lock > *:not(.popup):not(header) {
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+/* ===== Popup Layer ===== */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;   /* สูงพิเศษ */
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+/* เปิด popup */
+.popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-box {
+  position: relative;
+  width: 900px;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+overflow: hidden;
+border-radius: 10px;
+background: #fff;
+
+  border-bottom: 20px solid #fff;
+
+  border-radius: 10px;
+  overflow: visible;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+}
+
+.popup-header{
+  padding:12px 20px;
+    border-radius: 10px;
+  font-weight:bold;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+
+.popup-content img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* รูป */
+.popup-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.close-btn{
+  position:static;
+  background:none;
+  border:none;
+  font-size:18px;
+  cursor:pointer;
+  color:#666;
+}
+
+.close-btn:hover{
+  color:black;
+}
+
+/* ===== ป้าย NEWS ===== */
+.popup-label {
+  position: absolute;
+  top: -18px;
+  left: 30px;
+  background: white;
+  color: black;
+  padding: 6px 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 14px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+.popup-content{
+  perspective: 1000px;
+  overflow:hidden;
+}
+
+
+
+.top-notice{
+  position:fixed;
+  top:90px;      /* 👈 ปรับให้ไม่ชน header */
+  right:10px;    /* 👈 ชิดขวา */
+  z-index:9999;
+
+  width:400px;
+
+  background:linear-gradient(90deg,#4d8eff,#3bc7ff);
+  border-radius:10px;
+
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+
+  transform:translateX(120%);  /* 🔥 ซ่อนออกขวา */
+  opacity:0;
+  transition:0.4s ease;
+}
+
+/* ตอนแสดง */
+.top-notice.show{
+  transform:translateX(0);
+  opacity:1;
+}
+
+.notice-content{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:10px 15px;
+  color:white;
+}
+
+/* หมุนตอนเข้า */
+@keyframes spinIn {
+  0% {
+    transform: rotate(-360deg) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(30deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* หมุนตอนออก */
+@keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ใช้กับโลโก้ */
+.notice-logo{
+  width:50px;
+  transition:0.3s;
+}
+
+/* ตอนแสดง */
+.top-notice.show .notice-logo{
+  animation: spinIn 0.6s ease;
+}
+
+/* ตอนหาย */
+.top-notice.hide .notice-logo{
+  animation: spinOut 0.5s ease forwards;
+}
+
+.notice-title{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.notice-sub{
+  font-size:13px;
+  opacity:0.9;
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.login-btn{
+  display:flex;
+  align-items:center;
+}
+
+.login-text{
+  text-decoration:none;
+  font-weight:700;
+  color:#333;
+  padding:8px 16px;
+  border-radius:20px;
+  transition:0.3s;
+}
+
+.login-text:hover{
+  background:#fc92e9;
+  color:white;
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+  <div id="topNotice" class="top-notice">
+  <div class="notice-content">
+    <img src="img/logo.png" class="notice-logo">
+
+    <div>
+      <div class="notice-title">
+        สำหรับนักเรียน นักศึกษา และคณะครู
+      </div>
+      <div class="notice-sub">
+        คลิกอีกครั้งเพื่อทำการล็อคอินเข้าสู่เว็บไซต์
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ===== POPUP ===== -->
+<div id="imagePopup" class="popup">
+  <div class="popup-box">
+
+    <div class="popup-header">
+      <span>NEWS</span>
+      <button class="close-btn" onclick="closePopup()">✕</button>
+    </div>
+
+<div class="popup-content">
+  <img id="adImage" alt="Advertisement">
+</div>
+
+  </div>
+</div>
+
+
+
+<script>
+const ads = [
+  "https://drive.google.com/thumbnail?id=1MdziEJmXaWIjJNrEPWOTwwOr9S99DX87&sz=w1000",
+  "https://drive.google.com/thumbnail?id=1GrgTJn3a2LV0sI2LxU4buoGT3pjbHuPR&sz=w1000",
+];
+
+let currentAd = 0;
+const img = document.getElementById("adImage");
+const popup = document.getElementById("imagePopup");
+
+// ใส่รูปแรกทันที
+img.src = ads[0];
+
+// แสดง popup ตอนโหลดหน้า
+window.onload = function(){
+
+  popup.classList.add("show");
+  document.body.classList.add("popup-lock");
+
+  // 🔥 เช็คก่อนว่ามี google ยัง
+  if (window.google && google.accounts) {
+    google.accounts.id.initialize({
+      client_id: "629315027635-6mfg1khovoiarkin99fuambmfmmk5bnj.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+  }
+
+};
+
+window.closePopup = function(){
+
+  if(currentAd + 1 >= ads.length){
+    popup.classList.remove("show");
+    document.body.classList.remove("popup-lock");
+    return;
+  }
+
+  currentAd++;
+  img.src = ads[currentAd];
+
+};
+</script>
+
+
+
+
+<header class="main-header">
+
+  <div class="logo-area">
+    <img src="img/logo.png" alt="โลโก้" class="logo-img">
+    <div class="logo-text">
+      <h1>แผนกวิชาคอมพิวเตอร์</h1>
+      <span>วิทยาลัยเทคนิคบัวใหญ่</span>
+    </div>
+  </div>
+
+  <!-- 👇 ห่อ nav + login -->
+  <div class="nav-right">
+
+    <nav>
+      <ul>
+        <li><a href="#">หน้าแรก</a></li>
+
+        <li>
+          <a href="#">ผลงาน ▾</a>
+          <div class="dropdown">
+            <a href="#">โครงงาน</a>
+            <a href="activity.html">กิจกรรม</a>
+            <a href="portfolio.html">รางวัล</a>
+          </div>
+        </li>
+
+        <li>
+          <a href="#">ระบบ ▾</a>
+          <div class="dropdown">
+            <a href="dashboard.html">แดชบอร์ด</a>
+          </div>
+        </li>
+
+      <li>
+        <a href="#">ติดต่อ ▾</a>
+        <div class="dropdown">
+          <a href="teacher.html">ติดต่อครู</a>
+          <a href="map.html">แผนที่</a>
+          <a href="#">ช่องทางออนไลน์</a>
+          <a href="#">คำถามที่พบบ่อย</a>
+        </div>
+      </li>
+      </ul>
+    </nav>
+
+</div>
+    </div>
+
+  </div>
+
+</header>
+<section class="hero">
+  <img src="https://lh3.googleusercontent.com/d/1lNMRB62Oqxob7cwJmT4i2d0Wg87LDeD9" class="floating-logo" alt="โลโก้แผนก">
+
+  <div class="hero-content">
+    <h2>แผนกวิชาคอมพิวเตอร์</h2>
+    <p>เว็บไซต์แผนกวิชาสำหรับนักเรียน นักศึกษา และผู้ปกครอง<br>วิทยาลัยเทคนิคบัวใหญ่</p>
+    <a href="https://www.facebook.com/computer.bytc" class="btn">ช่องทางออนไลน์ เพจ facebook</a>
+  </div>
+</section>
+
+
+ <div class="container">
+<section class="menu-icons">
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1oqtDeEK8M3_aIcM6-7dmjlvp7vxaN7GGsj-0k0yLJJW4GQ/viewform" class="menu-item">
+    <img src="https://lh3.googleusercontent.com/d/1RBnjrZJSVXwduG4w3ygOYUfzOEfCHC_V" class="menu-icon">
+    <span>สมัครเรียน</span>
+  </a>
+
+  <a href="Download.html" class="menu-item" data-key="Download" onclick="return checkLogin(event,this)">
+    <img src="https://lh3.googleusercontent.com/d/1ubpgWe2DAsEcMh7qyEwSjdcMMaWMcZUO" class="menu-icon">
+    <span>ดาวน์โหลด</span>
+  </a>
+
+  <a href="teacher.html" class="menu-item">
+    <img src="https://drive.google.com/thumbnail?id=1PGVMZ8Kj1-KvO6YEHU50xEmwQYcWpXII&sz=w1000" class="menu-icon">
+    <span>ติดต่อครู</span>
+  </a>
+
+  <a href="map.html" class="menu-item">
+    <img src="https://drive.google.com/thumbnail?id=1-faY8aeqSYsqswRjFqf3MSYaBs2C1u67&sz=w1000" class="menu-icon">
+    <span>แผนที่</span>
+  </a>
+
+  <a href="online documents.html" class="menu-item" data-key="EEXIT" onclick="return checkLogin(event,this)">
+    <img src="https://lh3.googleusercontent.com/d/1Bo7_-51SFsqW78-5XyaKQqDdJgXX59b5" class="menu-icon">
+    <span>บริการของ EEXIT</span>
+  </a>
+
+    <a href="timetable.html" class="menu-item" data-key="timetable" onclick="return checkLogin(event,this)">
+    <img src="https://lh3.googleusercontent.com/d/19MA-53A6EvdmB8VWifGA4pqLWKvzvo6t" class="menu-icon">
+    <span>ตารางเรียน</span>
+  </a>
+
+      <a href="work.html" class="menu-item" data-key="work" onclick="return checkLogin(event,this)">
+    <img src="https://lh3.googleusercontent.com/d/1RY7EeHgcYuSWVQOzdKqHdf0HcfcrxMAr" class="menu-icon">
+    <span>สถานะฝึกงาน</span>
+  </a>
+
+        <a href="study.html" class="menu-item">
+    <img src="https://lh3.googleusercontent.com/d/1O9Rl8oLKzSpSYH21nAKCxlElbzC4xc5l" class="menu-icon">
+    <span>แนะแนว</span>
+  </a>
+
+</section>
+
+
+<section class="promo-section">
+  <!-- แถวที่ 1 -->
+  <div class="promo-row">
+    <div class="promo-text">
+      <h2>สาขาวิชาเทคโนโลยีสารสนเทศ</h2>
+      <p>
+        การใช้โปรแกรมสำเร็จรูปในสำนักงาน Microsoft Office พื้นฐานการพิมพ์สัมผัส<br>
+       ภาษา TH/ENG การซ่อมและประกอบเครื่องคอมพิวเตอร์  การใช้โปรแกรมกราฟิกออกแบบแผ่นพับ<br>
+        โลโก้ ป้ายงานต่างๆ การตัดต่อ วิดีโอขั้นพื้นฐานจนถึงระดับมืออาชีพเพื่อเป็นนัก Video Editor<br>
+        การเขียนโปรแกรมคอมพิวเตอร์ขั้นพื้นฐาน ด้วยภาษา HTML, PHP, JAVA, Python, ฯลฯ<br>
+        การออกแบบและพัฒนาเว็บไซต์ด้วยโปรแกรมสำเร็จรูป การสร้างเกมและการ์ตูน Animation 2 มิติ<br>
+        และ 3 มิติ การออกแบบและติดตั้งระบบเครือข่ายการออกแบบและพัฒนาระบบฐานข้อมูล <br>
+        การพัฒนา Web e-Learning และ Mobile Application การนำ Social Media 
+มาประยุกต์ใช้ในธุรกิจออนไลน์
+      </p>
+    </div>
+
+    <div class="promo-image">
+      <img src="https://lh3.googleusercontent.com/d/157QsYw3DnVEcLPYnr1cGbM63C_vx6uof">
+    </div>
+  </div>  <!-- 👈 ต้องมีตัวนี้ -->
+
+
+  <!-- แถวที่ 2 -->
+  <div class="promo-row reverse">
+    <div class="promo-text">
+      <h2>สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล</h2>
+      <p>
+      โปรแกรมสำเร็จรูปในสักนักงาน Microsoft Office พื้นฐานพิมพ์สัมผัส <br>
+        ภาษา TH/ENG การซ่อมและประกอบเครื่องคอมพิวเตอร์<br>
+        การออกแบบงานกราฟิกป้ายประชาสัมพันธ์ การตัดต่อวิดีโอ<br>
+       และหลักการถ่ายภาพ การเขียนโปรแกรมคอมพิวเตอร์ขั้นพื้นฐาน<br>
+     ออกแบบและพัฒนาเว็บไซต์ด้วยโปรแกรมสำเร็จรูป<br>
+      ติดตั้งระบบเครือข่าย ออกแบบและพัฒนาระบบฐานข้อมูล <br>
+      การนำ Social Media 
+มาประยุกต์ใช้ในธุรกิจออนไลน์
+      </p>
+    </div>
+
+    <div class="promo-image">
+      <img src="https://lh3.googleusercontent.com/d/1yIBqzC37UoPjO3v4_D_jgGXP-Hvp7QCf">
+    </div>
+  </div>
+</section>
+
+<section>
+<!-- ===== สไลด์บน ===== -->
+<div class="slider2 " id="slider">
+  <div class="slides2 " id="slides">
+    <div class="slide2 "><img src="https://lh3.googleusercontent.com/d/1KxCDgPk0ELjAIflBkXduBzQp9QoJsVrI"></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="text-wrapper ">
+  <div class="text-section ">
+    <h1>แผนกวิชาคอมพิวเตอร์ วิทยาลัยเทคนิคบัวใหญ่</h1>
+    <p>
+      แผนกวิชาคอมพิวเตอร์ วิทยาลัยเทคนิคบัวใหญ่ แหล่งเรียนรู้ด้านเทคโนโลยีสารสนเทศครบวงจร
+      อัปเดตความรู้ทันสมัย พร้อมสู่โลกดิจิทัล มุ่งเน้นการเรียนการสอนด้านคอมพิวเตอร์
+      ทั้งฮาร์ดแวร์ ซอฟต์แวร์ ระบบเครือข่าย โปรแกรมมิ่ง และงานดิจิทัลสมัยใหม่
+      เรียนจริง ปฏิบัติจริง พร้อมอุปกรณ์และห้องปฏิบัติการที่ได้มาตรฐาน
+      มุ่งพัฒนาผู้เรียนให้มีทักษะตรงตลาดแรงงาน พร้อมคุณธรรมและความรับผิดชอบ
+    </p>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="poster-row ">
+  <div class="poster-card "><img src="https://lh3.googleusercontent.com/d/1qgpdL7XsDI0lH1-odEDDzqUI4YGw--GB"></div>
+  <div class="poster-card "><img src="https://lh3.googleusercontent.com/d/1Z20Z1os3G9sF3NJCmrsxPzc7PVlzkhzK"></div>
+  <div class="poster-card "><img src="https://lh3.googleusercontent.com/d/1QExnqMQeg5jZaVG1tbIOSf5qgAFC9axB"></div>
+  <div class="poster-card "><img src="https://lh3.googleusercontent.com/d/1nwQP2G1k4FpUg_hjnw7FLR-VNHbmvNqu"></div>
+  <div class="poster-card "><img src="https://lh3.googleusercontent.com/d/1Na-fPNawQI99cjYlS1H-buM8aaMbLofs"></div>
+</div>
+</section>
+
+<!-- ===== สไลด์ล่าง ===== -->
+<section class="slider-section">
+  <div class="slider-container" id="slider2">
+    <div class="slider-track" id="sliderTrack2">
+      <div class="slide"><img src="https://lh3.googleusercontent.com/d/1AiEFajV39iMaYPIkU6vLLPAFzkaLIJAd" alt=""></div>
+      <div class="slide"><img src="https://lh3.googleusercontent.com/d/1ZUe3ceEVxG4cNih9g8aqqmpUFjZ7hOj9" alt=""></div>
+      <div class="slide"><img src="https://lh3.googleusercontent.com/d/1UGoeV_kuYrswW4gpd8sBwW3jiUoVYieZ" alt=""></div>
+      <div class="slide"><img src="https://lh3.googleusercontent.com/d/1ByOl5Xz_SBISxQ6fBAZVFzYZPHOpefOi" alt=""></div>
+    </div>
+    <div class="slider-dots" id="sliderDots2"></div>
+  </div>
+</section>
+ </div>
+
+<footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-column">
+      <h3>เมนูหลัก</h3>
+      <a href="#">หน้าแรก</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ผลงาน</h3>
+      <a href="#">โครงงาน</a>
+      <a href="activity.html">กิจกรรม</a>
+      <a href="portfolio.html">รางวัล</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ระบบ</h3>
+      <a href="#">แดชบอร์ด</a>
+      <a href="#">ตั้งค่าบัญชี</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ติดต่อ</h3>
+      <a href="teacher.html">ติดต่อครู</a>
+      <a href="map.html">แผนที่</a>
+      <a href="#">ช่องทางออนไลน์</a>
+      <a href="#">คำถามที่พบบ่อย</a>
+    </div>
+
+    <script>
+  // URL ที่ได้จากขั้นตอน Deploy
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzSiYRIYQ5qqJWHZw4RghGqUKjIqZEU-UxuxvjKqViYL8XQQlbK-hEXMexDUq1ZiJGN/exec';
+
+  // สั่งให้ Apps Script บวกเลขเพิ่มเมื่อหน้าเว็บโหลดเสร็จ
+  fetch(scriptURL + "?action=update")
+    .then(response => response.json())
+    .then(data => console.log("ยอดวิวปัจจุบัน: " + data.views));
+</script>
+
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<div id="g_id_onload"
+     data-client_id="629315027635-6mfg1khovoiarkin99fuambmfmmk5bnj.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+
+<div style="display:none;">
+  <div class="g_id_signin"></div>
+</div>
+
+
+
+<script>
+let noticeTimeout;
+let clickedMap = {}; // 🔥 เก็บสถานะแต่ละปุ่ม
+
+function checkLogin(event, el){
+
+  const key = el.dataset.key;
+
+  // 👉 ถ้าปุ่มนี้เคยกดแล้ว (ในหน้านี้เท่านั้น)
+  if(clickedMap[key]){
+    return true;
+  }
+
+  let email = sessionStorage.getItem("userEmail");
+
+  if(!email || !email.endsWith("@bic.ac.th")){
+    event.preventDefault();
+
+    const notice = document.getElementById("topNotice");
+
+    clearTimeout(noticeTimeout);
+
+    notice.classList.add("show");
+
+    noticeTimeout = setTimeout(()=>{
+      notice.classList.add("hide");
+
+      setTimeout(()=>{
+        notice.classList.remove("show");
+        notice.classList.remove("hide");
+      },500);
+    },3000);
+
+    // 🔥 จำเฉพาะ "หน้านี้"
+    clickedMap[key] = true;
+
+    return false;
+  }
+
+  return true;
+}
+</script>
+
+  </div>
+</footer>
+
+<script>
+
+
+const track2 = document.getElementById("sliderTrack2");
+const dots2 = document.getElementById("sliderDots2");
+
+let index2 = 0;
+const total2 = track2.children.length;
+
+/* สร้างจุด */
+for(let i=0;i<total2;i++){
+  const dot = document.createElement("span");
+  if(i===0) dot.classList.add("active");
+  dots2.appendChild(dot);
+}
+
+function moveSlide(){
+  index2++;
+  if(index2 >= total2){
+    index2 = 0;
+  }
+
+  track2.style.transform = `translateX(-${index2 * 100}%)`;
+
+  dots2.querySelectorAll("span").forEach((dot,i)=>{
+    dot.classList.toggle("active", i === index2);
+  });
+}
+
+setInterval(moveSlide,4000);
+
+</script>
+
+</body>
+</html>

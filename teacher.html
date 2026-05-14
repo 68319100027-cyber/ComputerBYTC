@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Department - Meet the Team</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ===== FONT ===== */
+        @font-face{
+            font-family:'FCVision';
+            src:url('fonts/FCVision-Light.woff2') format('woff2');
+            font-weight:300;
+        }
+        @font-face{
+            font-family:'FCVision';
+            src:url('fonts/FCVision-Bold.woff2') format('woff2');
+            font-weight:700;
+        }
+
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'FCVision',sans-serif; }
+
+        body { background: #f0f2f5; overflow-x: hidden; }
+
+        /* --- Intro Video Style --- */
+        .intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; z-index: 100000;
+            display: flex; justify-content: center; align-items: center;
+            transition: 1s ease-in-out;
+        }
+
+        #introVideo {
+            position: absolute; width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .app-ui { 
+            display: none; position: relative; z-index: 10; 
+            width: 90%; max-width: 400px; text-align: center;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px); padding: 40px 30px;
+            border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .app-logo { width: 80px; margin-bottom: 20px; border-radius: 20px; }
+
+        .btn-open-app {
+            width: 100%; padding: 16px; border: none; border-radius: 15px;
+            background: #4d8eff; color: white; font-weight: bold; font-size: 1.1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 25px;
+        }
+
+        .btn-open-app:hover { background: #3b7dec; transform: scale(1.02); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Grid & Teacher Card --- */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            max-width: 1200px; 
+            margin: 120px auto 50px; 
+            padding: 0 20px; 
+        }
+
+        .teacher-card { 
+            display: flex; 
+            background: white; 
+            height: 160px; 
+            cursor: pointer; 
+            overflow: hidden; 
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05); 
+            transition: 0.3s; 
+        }
+
+        .teacher-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        .photo-side { width: 45%; background: #eee; position: relative; }
+        .photo-side img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .info-side { 
+            width: 55%; padding: 15px; position: relative; 
+            display: flex; flex-direction: column; justify-content: center; 
+            color: white; z-index: 1; 
+        }
+
+        .info-side::before { 
+            content: ""; position: absolute; 
+            top: 0; left: -25px; width: 140%; height: 100%; 
+            background: inherit; transform: skewX(-15deg); z-index: -1; 
+        }
+
+        .info-side h3 { margin: 0; font-size: 1.1rem; line-height: 1.2; position: relative; }
+        .info-side p { margin: 5px 0; font-size: 0.85rem; opacity: 0.9; position: relative; }
+
+        /* สีประจำการ์ด */
+        .c-blue { background-color: #3b82f6; } 
+        .c-red { background-color: #ef4444; } 
+        .c-yellow { background-color: #eab308; } 
+        .c-purple { background-color: #a855f7; } 
+        .c-green { background-color: #22c55e; } 
+        .c-orange { background-color: #f97316; } 
+        .c-pink { background-color: #ec4899; } 
+        .c-teal { background-color: #14b8a6; } 
+        .c-dark { background-color: #334155; }
+        
+        /* Modal Style */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: none; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(8px); }
+        .modal-box { background: white; width: 90%; max-width: 700px; border-radius: 30px; display: flex; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: fadeIn 0.4s ease; }
+        .m-left { width: 45%; } .m-left img { width: 100%; height: 100%; object-fit: cover; }
+        .m-right { width: 55%; padding: 40px; display: flex; flex-direction: column; justify-content: center; color: #333; }
+        
+        /* ปุ่มคัดลอกอีเมล */
+        .btn-contact { 
+            background: #007aff; 
+            color: white; 
+            border: none;
+            padding: 15px; 
+            border-radius: 12px; 
+            text-align: center; 
+            margin-top: 20px; 
+            font-weight: bold; 
+            cursor: copy;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .btn-contact:hover { opacity: 0.9; }
+
+        .btn-close { background: none; border: none; color: #888; margin-top: 15px; cursor: pointer; font-size: 0.9rem; }
+
+        @media (max-width: 900px) { 
+            .grid-container { grid-template-columns: 1fr; margin-top: 100px; } 
+            .modal-box { flex-direction: column; max-width: 350px; } 
+            .m-left, .m-right { width: 100%; } 
+            .m-left { height: 250px; } 
+        }
+    </style>
+</head>
+<body>
+
+<div id="introOverlay" class="intro-overlay">
+    <video id="introVideo" playsinline muted autoplay>
+        <source src="video/Transition-1.mp4" type="video/mp4">
+    </video>
+
+    <div id="appUI" class="app-ui">
+        <div class="app-card">
+            <img src="img/logo.png" class="app-logo">
+            <h2>COMPUTER BYTC</h2>
+            <p>วิทยาลัยเทคนิคบัวใหญ่</p>
+            <button class="btn-open-app" onclick="startGame()">ติดต่อครู</button>
+        </div>
+    </div>
+</div>
+
+<div id="header"></div>
+<div class="grid-container" id="teamGrid"></div>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal-box">
+        <div class="m-left"><img id="m-img" src=""></div>
+        <div class="m-right">
+            <h2 id="m-name" style="margin:0; font-size: 1.8rem; color: #222;"></h2>
+            <p id="m-pos" style="color: #666;"></p>
+            <button id="m-email-btn" class="btn-contact" onclick="copyEmail()">คัดลอกอีเมล</button>
+            <button class="btn-close" onclick="closeModal()">ย้อนกลับ</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const video = document.getElementById('introVideo');
+    const appUI = document.getElementById('appUI');
+    const overlay = document.getElementById('introOverlay');
+
+    // จัดการ Intro
+    video.onended = () => showButton();
+    
+    // สำรอง 3.5 วิ ถ้าวิดีโอไม่โหลดหรือเล่นไม่จบ
+    setTimeout(() => {
+        if (appUI.style.display !== "block") showButton();
+    }, 3500); 
+
+    function showButton() {
+        video.style.opacity = "0.3";
+        video.style.filter = "blur(10px)";
+        video.style.transition = "1.5s";
+        appUI.style.display = "block";
+    }
+
+    function startGame() {
+        overlay.style.opacity = "0";
+        overlay.style.transform = "scale(1.1)";
+        setTimeout(() => {
+            overlay.style.display = "none";
+        }, 1000);
+    }
+
+    /* ===== โหลด Header และข้อมูลครู ===== */
+    fetch("components/header.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("header").innerHTML = data)
+        .catch(err => console.error("Header load error:", err));
+
+    const teachers = [
+        { name: "นายภัคธนกฤษ ทองนอก", pos: "หัวหน้าแผนกวิชาคอมพิวเตอร์", email: "phakthanakrit@bic.ac.th", color: "c-blue", pic: "https://drive.google.com/thumbnail?id=13z5rj7xqcaJJ0dfyS5QYWFQrwZuIrJmk&sz=w1000" },
+        { name: "นางมลฤดี รอดสุวรรณ", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "monruedee@bic.ac.th", color: "c-red", pic: "https://drive.google.com/thumbnail?id=1waMt0ddtn2ux3FslZv4BSDt9FWbNc05D&sz=w1000" },
+        { name: "นายปรีชา ปรือปรัง", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "preecha.p@bic.ac.th", color: "c-yellow", pic: "https://drive.google.com/thumbnail?id=1iAg_uSL5KNCv65c2z00cFtL8v86CuiK_&sz=w1000" },
+        { name: "นายประชา โตนดไธสง", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "pracha@bic.ac.th", color: "c-purple", pic: "https://drive.google.com/thumbnail?id=19Ua2fvO0QNEX4yDOSgtPEZnt3qYbIiod&sz=w1000" },
+        { name: "นางสาวดวงจันทร์ นาคดี", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "duangjan@bic.ac.th", color: "c-green", pic: "https://drive.google.com/thumbnail?id=1V-dXUKmOTmeOBtI0zzAG5ezrWl8aPtSR&sz=w1000" },
+        { name: "นางสาวดวงใจ พิกุล", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "duangjai@bic.ac.th", color: "c-orange", pic: "https://drive.google.com/thumbnail?id=1ARUBfux3QjNtb1CSxTSMPq8k1t5QMD2Y&sz=w1000" },
+        { name: "นางพรธิดา จันปัญญา", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "porntida@bic.ac.th", color: "c-pink", pic: "https://drive.google.com/thumbnail?id=17Zt1RchTRHqqqnaVSFY11Ky0Dx3j06Eg&sz=w1000" },
+        { name: "นายไกรศร ประกิจ", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "kraisorn.pr@bic.ac.th", color: "c-teal", pic: "https://drive.google.com/thumbnail?id=1CDfYsXlA6MnZM2aEiL4UHGa93L4CYAz8&sz=w1000" },
+        { name: "นางสาวปวีณา รักษาศรี", pos: "ครูผู้สอนประจำแผนกวิชาคอมพิวเตอร์", email: "paweena.r@bic.ac.th", color: "c-dark", pic: "https://drive.google.com/thumbnail?id=1_J6369DgwBsDJsriIGCtJdBlDqAkXbcY&sz=w1000" }
+    ];
+
+    const grid = document.getElementById('teamGrid');
+    teachers.forEach((t) => {
+        const card = document.createElement('div');
+        card.className = 'teacher-card';
+        card.onclick = () => openModal(t);
+        card.innerHTML = `
+            <div class="photo-side"><img src="${t.pic}" loading="lazy"></div>
+            <div class="info-side ${t.color}">
+                <h3>${t.name}</h3>
+                <p>${t.pos}</p>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    /* ===== MODAL & COPY EMAIL FUNCTIONS ===== */
+    function openModal(t) {
+        document.getElementById('m-img').src = t.pic; 
+        document.getElementById('m-name').innerText = t.name;
+        document.getElementById('m-pos').innerText = t.pos;
+        
+        const emailBtn = document.getElementById('m-email-btn');
+        emailBtn.innerText = t.email; // โชว์ชื่ออีเมลบนปุ่ม
+        emailBtn.setAttribute('data-email', t.email); // เก็บค่าอีเมลไว้ใน data attribute
+        emailBtn.style.background = "#007aff"; // รีเซ็ตสีปุ่มกรณีเคยคลิกไปแล้ว
+        
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function copyEmail() {
+        const emailBtn = document.getElementById('m-email-btn');
+        const emailText = emailBtn.getAttribute('data-email');
+
+        // ฟังก์ชันคัดลอกลงคลิปบอร์ด
+        navigator.clipboard.writeText(emailText).then(() => {
+            const originalText = emailBtn.innerText;
+            
+            emailBtn.innerText = "คัดลอกสำเร็จ!";
+            emailBtn.style.background = "#22c55e"; // เปลี่ยนเป็นสีเขียว
+            
+            // เปลี่ยนกลับเป็นอีเมลปกติหลังจาก 2 วินาที
+            setTimeout(() => {
+                emailBtn.innerText = emailText;
+                emailBtn.style.background = "#007aff";
+            }, 2000);
+        }).catch(err => {
+            console.error('คัดลอกไม่สำเร็จ:', err);
+        });
+    }
+
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    window.onclick = (e) => { if(e.target == document.getElementById('modal')) closeModal(); }
+</script>
+
+</body>
+</html>

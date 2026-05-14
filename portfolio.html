@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ผลงานนักเรียน แผนกวิชาคอมพิวเตอร์</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="img/logo.png">
+
+<style>
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "FC Vision [Non-commercial]", sans-serif;
+      min-height: 100vh;
+      background-color: #fff;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin-top: 100px; 
+}
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-overlay h1 {
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-overlay h1 span {
+      color: #0084ff;
+    }
+
+    .hero-overlay p {
+      font-size: 18px;
+      color: #dddddd;
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #ff4d4d;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff6a6a;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+    }
+
+    .btn-outline:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* ===== SECTION HEADER (TOP TITLE) ===== */
+    .section-header {
+      background: #ffffff;
+      padding: 40px 60px 20px;
+    }
+
+    .section-title {
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 20px; /* สำหรับหัวข้อทั่วไป */
+      color: #000000;
+    }
+
+    .top-title {
+      margin-bottom: 0; /* 👈 หัวข้อบนติดกับแบนเนอร์ */
+    }
+
+    /* ===== TOP BANNERS ===== */
+    .top-banners {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .banner-card {
+      max-width: 580px;
+      background: #141a26;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+      transition: 0.25s;
+    }
+
+    .banner-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .banner-image img {
+      width: 100%;
+      aspect-ratio: 297 / 210;
+      object-fit: cover;
+      display: block;
+    }
+
+    .banner-body {
+      padding: 16px 18px 18px;
+    }
+
+    .banner-body h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .banner-body p {
+      font-size: 14px;
+      color: #c9c9c9;
+      line-height: 1.5;
+    }
+
+    /* ===== CONTENT SECTION ===== */
+    .content {
+      padding: 60px 80px 80px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background-color: #141a26;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 5 / 6;
+      object-fit: contain;
+      background-color: #0b0f14;
+    }
+
+    .card-body {
+      padding: 18px 20px 22px;
+    }
+
+    .card-body h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: #c9c9c9;
+      line-height: 1.5;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-overlay {
+        padding: 40px 30px;
+      }
+
+      .hero-overlay h1 {
+        font-size: 38px;
+      }
+
+      .content {
+        padding: 40px 30px 60px;
+      }
+    }
+
+    .first-title {
+      margin-bottom: -25px;
+    }
+
+    .section-title1 {
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      color: #000;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 50px;
+      text-align: left;
+    }
+
+    .top-title1 {
+      margin-top: 120px;
+    }
+
+.featured-banner {
+  position: relative;
+  width: 100%;
+  max-width: 1290px;
+  margin: 20px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;   /* ✅ บังคับให้สูงตามสัดส่วน */
+}
+
+
+.featured-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.featured-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.12) 40%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0.12) 60%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-20deg);
+  filter: blur(18px);        /* 👈 ทำให้ฟุ้ง */
+  opacity: 0.85;
+  pointer-events: none;
+  animation: shine 7s ease-in-out infinite; /* 👈 ช้าลง นุ่มขึ้น */
+}
+
+@keyframes shine {
+  0% {
+    left: -60%;
+  }
+  60% {
+    left: 120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+  background: #111;
+  color: white;
+  padding: 60px 0;
+  margin-top: 100px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.footer-column h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-column a {
+  color: #a3a3a3;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+
+.footer-column a:hover {
+  color: rgb(255, 255, 255);
+  padding-left: 5px;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+
+<section>
+  <h2 class="section-title1 top-title1">
+   รางวัลพระราชทาน
+  </h2>
+
+  <section class="featured-banner">
+    <img src="https://lh3.googleusercontent.com/d/1vKqZ-8zpEOSckcB-NRT1KgPIdmSfqDEY" alt="ผลงานเด่น">
+  </section>
+
+  <section>
+  <h2 class="section-title1 top-title1">
+  ทุนการศึกษาเฉลิมราชกุมารี 
+  </h2>
+
+  <section class="featured-banner">
+    <img src="https://lh3.googleusercontent.com/d/1QVTqh6ZyUzxdbcMan0wdJXQzrc450z2e" alt="ผลงานเด่น">
+  </section>
+
+  <!-- ===== TOP SECTION TITLE ===== -->
+  <div class="section-header">
+    <h2 class="section-title top-title first-title">
+      การประกวดสิงประดิษฐ์ของคนรุ่นใหม่ ระดับภาคตะวันออกเฉียงเหนือ ประจำปีการศึกษา 2568
+    </h2>
+  </div>
+
+  <!-- ===== TOP BANNERS ===== -->
+  <section class="top-banners">
+    <div class="banner-card">
+      <div class="banner-image">
+        <img src="https://lh3.googleusercontent.com/d/1AwRUJx-FU0HPdv3WJcD5ZOl5x2c52lyZ" alt="ผลงานระดับภาค">
+      </div>
+      <div class="banner-body">
+        <h3>การแข่งขันสิ่งประดิษฐ์ของคนรุ่นใหม่</h3>
+        <p>
+          ผลงาน BYTC Smart Chatbot <br>
+          ได้รับรางวัลระดับเหรียญเงิน ระดับภาคตะวันออกเฉียงเหนือ<br>
+          คะแนนรวม 77.86 คะแนน
+        </p>
+      </div>
+    </div>
+
+    <div class="banner-card">
+      <div class="banner-image">
+        <img src="https://lh3.googleusercontent.com/d/1F2heNOnTUb_DEhRWGGcnmaEp3EhhkcZc" alt="ผลงานระดับภาค">
+      </div>
+      <div class="banner-body">
+        <h3>การแข่งขันสิ่งประดิษฐ์ของคนรุ่นใหม่</h3>
+        <p>
+          ผลงาน IFarm Mate คู่หูอัจฉริยะสำหรับฟาร์ม <br>
+          ได้รับรางวัลระดับเหรียญทอง ระดับภาคตะวันออกเฉียงเหนือ <br>
+          คะแนนรวม 80.28 คะแนน
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENT GRID ===== -->
+  <section class="content">
+    <h2 class="section-title">การแข่งขันทักษะวิชาชีพ ประจำปีการศึกษา 2568</h2>
+
+    <div class="grid">
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1qohYC6RYUPKBP97r1ziMz75mz4h6k1rY" alt="ผลงาน 1">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะสื่อสารภาษาไทยเพื่อการนำเสนอข้อมูล ระดับปวช. <br>
+            ได้รับรางวัลชมเชย มาตรฐานระดับเหรียญเงิน <br>
+            คะแนนรวม 78 คะแนน
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1OWcPya5pdcilveD34p4-KHsZILsZX97s" alt="ผลงาน 2">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะเทคโนโลยีสารสนเทศด้านโปรแกรมและเครือข่ายด้วยกระบวนการ DevOps ระดับ ปวส. <br>
+            ได้รับรางวัลรองชนะเลิศ อันดับ 4 มาตรฐานระดับเหรียญทอง <br>
+            คะแนนรวม 82 คะแนน
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1uOLTBQlu_PINVLTjR0VHDgOztkbWuX1p" alt="ผลงาน 3">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะพัฒนาระบบประเมินบุคลากรด้วยระบบเทคโนโลยีสารสนเทศสมัยใหม่ ระดับ ปวช. <br>
+            ได้รับรางวัลรองชนะเลิศ อันดับ 3 มาตรฐานระดับเหรียญทอง <br>
+            คะแนนรวม 85 คะแนน
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1P_CVqeNcUQT6zJNTjBptUH28wI6mGN3V" alt="ผลงาน 4">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะการพัฒนานวัตกรรมเทคโนโลยีธุรกิจดิจิทัล ระดับ ปวส. <br>
+            ได้รับรางวัลชนะเลิศ อับดับ 4 มาตรฐานระดับเหรียญทอง <br>
+            คะแนนรวม 88.5 คะแนน
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1py9e8z1PvjFaNQcaXbVbZq-38ykgfN5x" alt="ผลงาน 5">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะการสร้างสื่อดิจิทัลคอนเทนต์ ระดับ ปวช. <br>
+            ได้รับรางวัลชมเชย มาตรฐานระดับเหรียญทอง <br>
+            คะแนนรวม 92 คะแนน
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://lh3.googleusercontent.com/d/1E3HW_bMYI7hbgWE6MIA_TsU48yQI8SWB" alt="ผลงาน 6">
+        <div class="card-body">
+          <h3>การแข่งขันทักษะวิชาชีพ</h3>
+          <p>
+            ทักษะพื้นฐานการประกวดดนตรีพื้นบ้าน เดี่ยวพิณ <br>
+            ได้รับรางวัลชนะเลิศ มาตรฐานระดับเหรียญทอง <br>
+            คะแนนรวม 100 คะแนน
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+<footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-column">
+      <h3>เมนูหลัก</h3>
+      <a href="#">หน้าแรก</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ผลงาน</h3>
+      <a href="#">โครงงาน</a>
+      <a href="activity.html">กิจกรรม</a>
+      <a href="portfolio.html">รางวัล</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ระบบ</h3>
+      <a href="#">แดชบอร์ด</a>
+      <a href="#">ตั้งค่าบัญชี</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ติดต่อ</h3>
+      <a href="teacher.html">ติดต่อครู</a>
+      <a href="map.html">แผนที่</a>
+      <a href="#">ช่องทางออนไลน์</a>
+      <a href="#">คำถามที่พบบ่อย</a>
+    </div>
+
+
+
+
+
+
+<script>
+
+/* ===== LOAD HEADER ===== */
+
+fetch("components/header.html")
+.then(res => res.text())
+.then(data => {
+
+  document.getElementById("header").innerHTML = data;
+
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+
+    if(!header) return;
+
+    if(window.scrollY > 10){
+      header.classList.add("active");
+    }else{
+      header.classList.remove("active");
+    }
+
+  });
+
+})
+.catch(error => console.error(error));
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Download Center</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+
+
+<style>
+/* ===== FONT ===== */
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Light.woff2') format('woff2');
+font-weight:300;
+}
+
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Bold.woff2') format('woff2');
+font-weight:700;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'FCVision',sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+background:#0b1117;
+color:white;
+}
+
+/* ===== HERO (แก้ตรงนี้) ===== */
+.hero{
+  height:300px;
+margin-top: 10px;
+  display:flex;
+  justify-content:center;   /* กลางแนวนอน */
+  align-items:center;       /* กลางแนวตั้ง */
+  text-align:center;
+}
+
+/* ===== TEXT ===== */
+.hero-text h1{
+    margin-top: 50px;
+font-size:120px;
+margin-bottom:10px;
+color:#3ec8ff;
+}
+
+.hero-text p{
+color:#ffffff;
+font-size:30px;
+}
+
+/* ===== SECTION ===== */
+.section{
+padding:80px 60px;
+background:#141920;
+margin-top:-120px;
+border-top-left-radius:20px;
+border-top-right-radius:20px;
+}
+
+.section h2{
+margin-bottom:30px;
+font-size:28px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:25px;
+}
+
+.card{
+background:#132c3e;
+border-radius:8px;
+overflow:hidden;
+transition:0.25s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
+}
+
+.card img{
+width:100%;
+height:210px;
+object-fit:cover;
+}
+
+.card-body{
+padding:15px;
+}
+
+.card-body h3{
+font-size:16px;
+margin-bottom:10px;
+}
+
+.download{
+display:inline-block;
+padding:8px 60px;
+background:#008be7;
+border-radius:4px;
+text-decoration:none;
+color:white;
+font-size:14px;
+transition:.2s;
+}
+
+.download:hover{
+background:#1aa3ff;
+}
+
+@media(max-width:900px){
+.hero-text h1{
+font-size:60px;
+}
+
+.hero-text p{
+font-size:22px;
+}
+
+.section{
+padding:60px 30px;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- โหลด overlay login -->
+<div id="loginContainer"></div>
+
+<script>
+fetch('login.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('loginContainer').innerHTML = data;
+  })
+  .catch(console.error);
+</script>
+
+<script src="js/login.js" defer></script>
+
+<!-- HEADER -->
+<div id="header"></div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-text">
+<h1>DOWNLOAD</h1>
+<p>ศูนย์รวมไฟล์สำหรับการเรียนและการใช้งาน</p>
+</div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="section">
+
+<h2>Downloads</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://lh3.googleusercontent.com/d/1Fz9ywFaiDiG8skpRW2kZbli7Oi-nm9Oj">
+<div class="card-body">
+<h3>EEXIT 1.0</h3>
+<a class="download" href="files/EEXIT.zip" download>ดาวน์โหลด</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lh3.googleusercontent.com/d/1mBwx4vDp0FGHrKJTQ2fWHtfHhfmLGXIk">
+<div class="card-body">
+<h3>หลักสูตร ประจำปี 2569</h3>
+<a class="download" href="files/lesson.pdf" download>ดาวน์โหลด</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lh3.googleusercontent.com/d/1dT-ixn1a45pRc_oobg-C95XTbc-EBiDr">
+<div class="card-body">
+<h3>คู่มือโครงงาน</h3>
+<a class="download" href="files/project.zip" download>ดาวน์โหลด</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lh3.googleusercontent.com/d/1_VeQsPXwAEWguHNTku2wtLvK2ChhgG5m">
+<div class="card-body">
+<h3>MY RMS</h3>
+<a class="download" href="https://play.google.com/store/apps/details?id=com.inno_school.rms.myrms&pcampaignid=web_share">ดาวน์โหลด</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lh3.googleusercontent.com/d/10uRGt7B4ouiWJ7WraO8TQ6ClFdU8i5aK">
+<div class="card-body">
+<h3>FORNT แผนกวิชาคอมพิวเตอร์ 1.0</h3>
+<a class="download" href="files/work.pdf" download>ดาวน์โหลด</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<script>
+fetch("components/header.html")
+.then(res => res.text())
+.then(data => {
+
+document.getElementById("header").innerHTML = data;
+
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", function(){
+
+if(!header) return;
+
+if(window.scrollY > 10){
+header.classList.add("active");
+}else{
+header.classList.remove("active");
+}
+
+});
+
+})
+.catch(error => console.error(error));
+</script>
+
+</body>
+</html>

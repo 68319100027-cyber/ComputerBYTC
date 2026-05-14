@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+
+    <title>SMART TIMETABLE</title>
+
+    <style>
+        @font-face { 
+            font-family: 'FCVision'; 
+            src: url('fonts/FCVision-Light.woff2') format('woff2'); 
+            font-weight: 300; 
+        }
+
+        @font-face { 
+            font-family: 'FCVision'; 
+            src: url('fonts/FCVision-Bold.woff2') format('woff2'); 
+            font-weight: 700; 
+        }
+
+* { 
+    box-sizing: border-box; 
+    font-family: 'FCVision', 'Kanit', sans-serif; 
+}
+
+body { 
+    color: #f8fafc; /* ย้ายมาใส่ที่ body แทน */
+}
+
+        body { 
+            background-color: #020617; 
+            color: #f8fafc; 
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0; /* เอา padding ออกเพื่อให้ Header เต็มจอ */
+        }
+
+        /* ตัวดันเนื้อหาลงมากัน Header บัง */
+        .content-spacer {
+            height: 120px; 
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .content-spacer {
+                height: 160px; 
+            }
+        }
+
+        .glass { 
+            background: rgba(30, 41, 59, 0.5); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+        }
+
+        .active-day { 
+            background: #2563eb !important; 
+            color: white !important; 
+            transform: scale(1.05); 
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); 
+        }
+
+        .time-highlight { 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            line-height: 1; 
+            color: #60a5fa; 
+        }
+        
+        .is-learning { 
+            border: 2px solid #ef4444 !important; 
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(30, 41, 59, 0.5) 100%) !important;
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.2);
+        }
+
+        .status-dot { 
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%; 
+            display: inline-block; 
+        }
+
+        .dot-learning { 
+            background: #ef4444; 
+            box-shadow: 0 0 10px #ef4444; 
+            animation: pulse-red 1s infinite; 
+        }
+
+        .dot-next { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        .dot-waiting { background: #eab308; box-shadow: 0 0 10px #eab308; }
+
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .card-anim { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-anim:hover { 
+            transform: translateY(-5px); 
+            background: rgba(30, 41, 59, 0.8); 
+        }
+
+        .loader { 
+            width: 24px; 
+            height: 24px; 
+            border: 3px solid #FFF; 
+            border-bottom-color: transparent; 
+            border-radius: 50%; 
+            display: inline-block; 
+            animation: rotation 1s linear infinite; 
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+
+  <!-- โหลด overlay login -->
+<div id="loginContainer"></div>
+
+<script>
+fetch('login.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('loginContainer').innerHTML = data;
+  })
+  .catch(console.error);
+</script>
+
+<script src="js/login.js" defer></script>
+
+
+    <div id="header"></div>
+
+    <div class="content-spacer"></div>
+
+    <div class="max-w-6xl mx-auto px-4 md:px-10 pb-10">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <div>
+                <h1 class="text-4xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent italic uppercase">TIMETABLE</h1>
+                <p class="text-slate-400 mt-1" id="live-clock">กำลังโหลดเวลา...</p>
+            </div>
+            <div class="flex gap-2 w-full md:w-auto">
+                <input type="text" id="sid" placeholder="รหัสนักศึกษา/ชื่อครู/ห้อง" 
+                class="glass w-full md:w-64 rounded-2xl px-6 py-4 text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none text-white">
+                <button id="searchBtn" onclick="fetchData()" 
+                class="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-2xl font-bold transition-all">
+                    <span id="btnText"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 mb-10" id="day-selector">
+            <button onclick="changeDay('จันทร์')" class="glass px-6 py-3 rounded-2xl font-bold day-btn">จันทร์</button>
+            <button onclick="changeDay('อังคาร')" class="glass px-6 py-3 rounded-2xl font-bold day-btn">อังคาร</button>
+            <button onclick="changeDay('พุธ')" class="glass px-6 py-3 rounded-2xl font-bold day-btn">พุธ</button>
+            <button onclick="changeDay('พฤหัสบดี')" class="glass px-6 py-3 rounded-2xl font-bold day-btn">พฤหัสบดี</button>
+            <button onclick="changeDay('ศุกร์')" class="glass px-6 py-3 rounded-2xl font-bold day-btn">ศุกร์</button>
+        </div>
+
+        <div id="main-content" class="hidden opacity-0 transition-opacity duration-500">
+            <div id="featured-area" class="mb-10 w-full"></div>
+            <div class="max-w-5xl mx-auto w-full">
+                <h2 class="text-2xl font-bold flex items-center gap-2 mb-6 text-white">
+                    <span class="w-2 h-8 bg-blue-500 rounded-full"></span>
+                    ตารางเรียนวัน <span id="display-day" class="text-blue-400"></span>
+                </h2>
+                <div id="schedule-list" class="grid grid-cols-1 gap-4"></div>
+            </div>
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-24 animate-pulse">
+            <i class="fa-solid fa-calendar-xmark text-7xl text-slate-800 mb-6"></i>
+            <p class="text-slate-500 text-xl italic">ไม่พบข้อมูล หรือยังไม่ได้ค้นหา</p>
+        </div>
+    </div>
+
+    <script>
+    /* ===== LOAD HEADER ===== */
+
+fetch("components/header.html")
+.then(res => res.text())
+.then(data => {
+
+  document.getElementById("header").innerHTML = data;
+
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+
+    if(!header) return;
+
+    if(window.scrollY > 10){
+      header.classList.add("active");
+    }else{
+      header.classList.remove("active");
+    }
+
+  });
+
+})
+.catch(error => console.error(error));
+
+        let allScheduleData = [];
+        const apiUrl = "https://script.google.com/macros/s/AKfycbxY1bJB44dPU5u93jx5x1F4BAttLIIDKegTAIRjo49J5ejfesyUd9AzjyE7wwJ6pILLTg/exec"; 
+
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleString('th-TH', { 
+                weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' 
+            });
+        }, 1000);
+
+        async function fetchData() {
+            const sid = document.getElementById('sid').value;
+            const btnText = document.getElementById('btnText');
+            if(!sid) return alert("กรุณากรอกรหัส");
+            
+            btnText.innerHTML = `<span class="loader"></span>`;
+            try {
+                const response = await fetch(`${apiUrl}?id=${sid}`);
+                const data = await response.json();
+                
+                if(!data.success || !data.schedule) throw new Error();
+
+                allScheduleData = data.schedule; 
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('empty-state').classList.add('hidden');
+                setTimeout(() => document.getElementById('main-content').classList.remove('opacity-0'), 100);
+                
+                changeDay(getCurrentDayName());
+            } catch (e) { 
+                document.getElementById('empty-state').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('hidden');
+            } finally {
+                btnText.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> ค้นหา`;
+            }
+        }
+
+        function changeDay(dayName) {
+            const btns = document.querySelectorAll('.day-btn');
+            btns.forEach(btn => {
+                if(btn.innerText === dayName) btn.classList.add('active-day');
+                else btn.classList.remove('active-day');
+            });
+            document.getElementById('display-day').innerText = dayName;
+            renderList(dayName);
+        }
+
+        function timeToMinutes(timeStr) {
+            if(!timeStr) return 0;
+            const cleanTime = timeStr.replace(':', '.');
+            const [h, m] = cleanTime.split('.').map(Number);
+            return (h * 60) + (m || 0);
+        }
+
+        function renderList(day) {
+            const listArea = document.getElementById('schedule-list');
+            const featuredArea = document.getElementById('featured-area');
+            listArea.innerHTML = "";
+            featuredArea.innerHTML = "";
+
+            const filtered = allScheduleData
+                .filter(item => item.day.includes(day))
+                .sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+
+            if (filtered.length === 0) {
+                listArea.innerHTML = `<div class="glass p-12 rounded-[2.5rem] text-center text-slate-500 italic">--- ไม่มีเรียน ---</div>`;
+                return;
+            }
+
+            const now = new Date();
+            const currentMinutes = (now.getHours() * 60) + now.getMinutes();
+            const isToday = (day === getCurrentDayName());
+
+            let learningIndex = -1;
+            if(isToday) {
+                learningIndex = filtered.findIndex(item => {
+                    const s = timeToMinutes(item.start);
+                    const e = timeToMinutes(item.end);
+                    return currentMinutes >= s && currentMinutes <= e;
+                });
+            }
+
+            filtered.forEach((item, index) => {
+                const isNow = (isToday && index === learningIndex);
+                if (isNow) {
+                    featuredArea.innerHTML = `
+                        <div class="glass is-learning p-8 md:p-10 rounded-[3rem] flex flex-col md:flex-row items-center gap-8 transition-all mb-10">
+                            <div class="flex flex-col items-center justify-center md:border-r border-red-500/30 md:pr-10 min-w-[180px]">
+                                <span class="text-xs text-red-400/80 mb-2 uppercase font-black tracking-widest">Current Class</span>
+                                <div class="text-5xl font-black text-white">${item.start}</div>
+                                <span class="text-lg text-slate-400 mt-1 font-bold italic">ถึง ${item.end}</span>
+                            </div>
+                            <div class="flex-grow text-center md:text-left">
+                                <div class="mb-4 flex items-center gap-3 justify-center md:justify-start">
+                                    <span class="dot-learning status-dot"></span> <span class="text-red-400 text-xs font-black uppercase tracking-widest">กำลังเรียนอยู่ (NOW)</span>
+                                </div>
+                                <h3 class="text-3xl md:text-5xl font-black text-white mb-5 tracking-tight">${item.subject}</h3>
+                                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                                    <span class="bg-red-500/20 text-red-200 px-6 py-2 rounded-2xl text-sm font-bold border border-red-500/30"><i class="fa-solid fa-door-open mr-2"></i>ห้อง ${item.room}</span>
+                                    <span class="bg-slate-800 text-indigo-300 px-6 py-2 rounded-2xl text-sm font-bold border border-slate-700"><i class="fa-solid fa-chalkboard-user mr-2"></i>${item.teacher}</span>
+                                </div>
+                            </div>
+                            <div class="w-32 h-32 md:w-40 md:h-40 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl flex-shrink-0 bg-white">
+                                <img src="${item.teacherPic || ''}" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(item.teacher)}&background=ffffff&color=000000'">
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let statusBadge = "";
+                if (isToday) {
+                    if (learningIndex !== -1 && index === learningIndex + 1) {
+                        statusBadge = `<span class="dot-next status-dot"></span> <span class="text-green-400 text-[10px] font-black uppercase">วิชาถัดไป</span>`;
+                    } else if (learningIndex !== -1 && index > learningIndex + 1) {
+                        statusBadge = `<span class="dot-waiting status-dot"></span> <span class="text-yellow-400 text-[10px] font-black uppercase">วิชาถัดไป</span>`;
+                    }
+                }
+
+                listArea.innerHTML += `
+                    <div class="glass p-6 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-6 card-anim">
+                        <div class="flex flex-col items-center justify-center border-r border-slate-700/50 pr-6 min-w-[140px]">
+                            <span class="text-[10px] text-slate-500 mb-1 uppercase font-black">Time Slot</span>
+                            <div class="time-highlight">${item.start}</div>
+                            <span class="text-xs text-slate-400 mt-1 font-bold italic">ถึง ${item.end}</span>
+                        </div>
+                        <div class="flex-grow text-center md:text-left">
+                            <div class="mb-2 flex items-center gap-2 justify-center md:justify-start">
+                                ${statusBadge}
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-3 tracking-tight">${item.subject}</h3>
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                <span class="bg-slate-800/80 text-blue-300 px-4 py-1.5 rounded-xl text-xs border border-slate-700">ห้อง ${item.room}</span>
+                                <span class="bg-slate-800/80 text-indigo-300 px-4 py-1.5 rounded-xl text-xs border border-slate-700">${item.teacher}</span>
+                            </div>
+                        </div>
+                        <div class="w-20 h-20 rounded-2xl overflow-hidden border-2 border-white flex-shrink-0 bg-white">
+                            <img src="${item.teacherPic || ''}" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(item.teacher)}&background=ffffff&color=000000'">
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function getCurrentDayName() {
+            const days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+            return days[new Date().getDay()];
+        }
+    </script>
+</body>
+</html>

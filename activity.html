@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>อัลบั้มกิจกรรม แผนกวิชาคอมพิวเตอร์</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<!-- เนื้อหา -->
+
+<script src="js/auth.js"></script>
+<script src="js/notice.js"></script>
+
+<script>
+fetch('components/header.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('header').innerHTML = data;
+  });
+</script>
+
+</body>
+</html>
+
+<style>
+
+/* ===== LOAD FONTS ===== */
+@font-face {
+  font-family: 'FCVision';
+  src: url('fonts/FCVision-Light.woff2') format('woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'FCVision';
+  src: url('fonts/FCVision-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'ImpactCustom';
+  src: url('fonts/impact.ttf') format('truetype');
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'FCVision', sans-serif;
+}
+
+body{
+margin:0;
+font-family:"Sarabun",sans-serif;
+}
+
+/* banner */
+
+.banner{
+position:relative;
+width:100%;
+margin-top:79px;
+}
+
+.banner img{
+width:100%;
+display:block;
+}
+
+/* ชื่อใหญ่ */
+
+.banner-title{
+position:absolute;
+top:13%;
+right:17%;
+}
+
+.banner-title h1{
+font-size:52px;
+margin:0;
+font-weight:800;
+}
+
+.banner-title p{
+margin-top:-5px;
+font-size:18px;
+color:#444;
+}
+
+/* เมนู */
+
+.album-menu{
+position:absolute;
+top:33%;
+right:13.4%;
+display:flex;
+gap:8px;
+background:#ffffff;
+padding:6px;
+border-radius:30px;
+position:absolute;
+}
+.album-menu a{
+cursor:pointer;
+user-select:none;
+}
+
+/* แถบชมพูเลื่อน */
+
+.slider{
+position:absolute;
+height:32px;
+background:#fc92e9;
+border-radius:20px;
+top:6px;
+left:6px;
+transition:0.35s;
+z-index:0;
+}
+
+/* ปุ่ม */
+
+.album-menu a{
+position:relative;
+text-decoration:none;
+padding:8px 18px;
+border-radius:20px;
+color:#555;
+font-size:15px;
+font-weight:600;
+transition:0.25s;
+z-index:1;
+}
+
+/* ปุ่มที่เลือก */
+
+.album-menu a.active{
+color:white;
+}
+
+/* hover */
+
+.album-menu a:hover{
+color:#000;
+}
+
+/* =========================
+   HERO SLIDER 2:1
+========================= */
+.hero{
+  position: relative;
+  width: 50%;
+  margin: 0;          /* เอา auto ออก */
+  overflow: hidden;
+ 
+}
+
+.hero img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;   /* หรือ left center */
+  
+}
+
+.slides{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.5s ease;
+  
+}
+
+.slide{
+  min-width:100%;
+  height:100%;
+}
+
+.slide a{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+.half{
+  width:50%;
+  height:100%;
+}
+
+.half img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ปุ่มเลื่อน */
+.nav{
+  position:absolute;
+  top:58%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  font-size:28px;
+  padding:10px 15px;
+  cursor:pointer;
+  z-index:10;
+}
+
+.prev{ left:15px; }
+.next{ right:15px; }
+
+.nav:hover{
+  background:black;
+}
+
+
+.section-title{
+  position: relative;
+  margin: 20px 0 0px 0;   
+  background:#fc92e9;
+  color:#ffffff;
+  padding:10px 20px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:0 20px 0 0;
+  width:fit-content;
+}
+
+.section-title2{
+  position:static;   /* หรือจะลบบรรทัด position ทิ้งเลย */
+  background:#fc92e9;
+  color:#ffffff;
+  padding:10px 20px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:0 20px 0px 0;
+  width:fit-content;
+  margin-bottom:-80px;
+}
+
+.section-title4{
+  position: relative;
+  margin: 20px 0 0px 0;   
+  background:#fc92e9;
+  color:#ffffff;
+  padding:10px 20px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:0 20px 0 0;
+  width:fit-content;
+}
+
+.section-title5{
+  margin:20px 0 0 0;
+  background:#fc92e9;
+  color:#ffffff;
+  padding:10px 40px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:0 20px 0 0;
+  width:fit-content;
+}
+
+.section-title6{
+  margin:20px 0 0 0;
+  background:#fc92e9;
+  color:#ffffff;
+  padding:10px 40px;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:0 20px 0 0;
+  width:fit-content;
+}
+
+.slider3{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  margin:0;
+}
+.slides3{
+display:flex;
+width:100%;
+height:100%;
+}
+
+.slide3{
+min-width:100%;
+height:100%;
+position:relative;
+}
+
+.slide3 img{
+width:100%;
+height:100%;
+top: 50%;
+object-fit:cover;
+display:block;
+}
+.slide3::after{
+  content:"";
+  position:absolute;
+  top:-70%;
+  left:-140%;
+  width:28%;
+  height:260%;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at center,rgba(255,255,255,.65) 0%,rgba(255,255,255,.28) 30%,rgba(255,255,255,.08) 55%,transparent 72%),
+    linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);
+  transform:rotate(18deg);
+  filter:blur(12px);
+  opacity:.85;
+  animation:lightSweep 5s linear infinite;
+}
+@keyframes lightSweep{from{left:-150%}to{left:150%}}
+
+.slider4{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  margin:0;
+}
+.slides4{
+display:flex;
+width:100%;
+height:100%;
+}
+
+.slide4{
+min-width:100%;
+height:100%;
+position:relative;
+}
+
+.slide4 img{
+width:100%;
+height:100%;
+top: 50%;
+object-fit:cover;
+display:block;
+}
+.slide4::after{
+  content:"";
+  position:absolute;
+  top:-70%;
+  left:-140%;
+  width:28%;
+  height:260%;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at center,rgba(255,255,255,.65) 0%,rgba(255,255,255,.28) 30%,rgba(255,255,255,.08) 55%,transparent 72%),
+    linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);
+  transform:rotate(18deg);
+  filter:blur(12px);
+  opacity:.85;
+  animation:lightSweep 5s linear infinite;
+}
+@keyframes lightSweep{from{left:-150%}to{left:150%}}
+
+/* ================= SMALL 2:1 SLIDER ================= */
+.small-slider{
+  width:100%;
+  aspect-ratio:2/1;
+  overflow:hidden;
+  position:relative;
+}
+
+.small-slides{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.5s ease;
+}
+
+.small-slide{
+  min-width:100%;
+  height:100%;
+}
+
+.small-slider a{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+.small-slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.small-slider button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  font-size:28px;      /* ขนาดตัวลูกศร */
+  padding:10px 15px;   /* ขนาดปุ่ม */
+  cursor:pointer;
+  z-index:10;
+}
+
+.small-slider button:hover{
+  background:black;
+}
+
+.small-prev{ left:10px; }
+.small-next{ right:10px; }
+
+
+
+/* ทำให้ทั้งสองบล็อคใช้ขนาดเดียวกัน */
+.small-slider,
+.single-2-1{
+  width:100%;
+  aspect-ratio:2/1;
+  overflow:hidden;
+}
+
+.album-full{
+width:90%;
+margin:auto;
+}
+
+.album-layout{
+display:flex;
+gap:30px;
+width:90%;
+max-width:1400px;
+margin:40px auto;
+align-items:flex-start;
+justify-content:center;
+}
+
+.hero{
+width:50%;
+}
+
+.right{
+width:50%;
+}
+
+/* ===== SECTION FRESHY ===== */
+
+.main{
+width:100%;
+margin-top:25px;
+}
+
+.left{
+  width:100%;
+}
+
+/* รูปใหญ่ */
+.red-box{
+  width:100%;
+  margin-bottom:20px;
+}
+
+.red-box img{
+  width:100%;
+  display:block;
+  border-radius:10px;
+}
+
+/* grid รูปแนวตั้ง */
+
+.grid-9-16{
+  display:grid;
+  grid-template-columns: repeat(5,1fr);
+  gap:15px;
+}
+
+/* slider แนวตั้ง */
+
+.v-slider{
+  position:relative;
+  width:100%;
+  aspect-ratio:9/16;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.v-slides{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform .5s ease;
+}
+
+.v-slide{
+  min-width:100%;
+  height:100%;
+}
+
+.v-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+.container{
+width:90%;
+max-width:1400px;
+margin:40px auto;
+}
+
+
+
+
+.vertical-slides{
+  display:flex;
+  transition:transform 0.5s ease;
+}
+
+.album-block{
+  margin-top:40px;   /* คุมก้อนข่าว */
+}
+
+.vertical-slider{
+  margin-top:80px;   /* คุมก้อนอัลบั้ม 3 */
+}
+
+
+
+.vertical-slide{
+  min-width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;   /* ซ้อนบน-ล่าง */
+}
+
+
+
+.vertical-slide img{
+  width:100%;
+  height:50%;        /* คนละครึ่ง */
+  object-fit:cover;
+  display:block;
+}
+
+
+.vertical-prev,
+.vertical-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  border:none;
+  width:35px;
+  height:35px;
+  cursor:pointer;
+  z-index:10;
+}
+
+.vertical-prev{
+  left:10px;
+}
+
+.vertical-next{
+  right:10px;
+}
+
+/* hover */
+.vertical-prev:hover,
+.vertical-next:hover{
+  background:#000;
+}
+
+.activity-layout{
+  display:flex;
+  gap:40px;
+  width:90%;
+  max-width:1400px;
+  margin:40px auto;
+  align-items:flex-start;
+}
+
+.freshy-section{
+  width:70%;
+}
+
+.album-section{
+  width:28%;
+}
+/* ===== Vertical Album Slider ===== */
+
+.vertical-slider{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/2;
+  overflow:hidden;
+}
+
+.vertical-slides{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.5s ease;
+}
+
+.vertical-prev,
+.vertical-next{
+  z-index:999;
+}
+
+.vertical-slide{
+  min-width:100%;
+  height:100%;
+}
+
+.vertical-slide img{
+  width:100%;
+  height:50%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ปุ่มเลื่อน */
+
+.vertical-prev,
+.vertical-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  width:35px;
+  height:35px;
+  font-size:18px;
+  cursor:pointer;
+  z-index:20;
+}
+
+.vertical-prev{
+  left:10px;
+}
+
+.vertical-next{
+  right:10px;
+}
+
+.vertical-prev:hover,
+.vertical-next:hover{
+  background:black;
+}
+
+.video-grid{
+  display:flex;
+  gap:30px;
+  width:90%;
+  max-width:1400px;
+  margin:40px auto;
+}
+
+.video-item{
+  flex:1;
+}
+
+.video-box{
+  aspect-ratio:16/9;
+}
+
+.video-box video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.section-video{
+    background:#ececec;
+    padding:0px 0 100px 0;
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+  background: #111;
+  color: white;
+  padding: 60px 0;
+  margin-top: 100px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.footer-column h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-column a {
+  color: #a3a3a3;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+
+.footer-column a:hover {
+  color: rgb(255, 255, 255);
+  padding-left: 5px;
+}
+
+</style>
+   
+ <section>
+<div class="banner">
+<img src="https://lh3.googleusercontent.com/d/15omOXT864mliMZFEWw2vDO-cMAwffoMf">
+<div class="banner-title">
+<h1>อัลบั้มกิจกรรม</h1>
+<p>และรูปกิจกรรมแผนกวิชาคอมพิวเตอร์</p>
+</div>
+<div class="album-menu">
+
+<span class="slider"></span>
+<a class="active">อัลบั้ม</a>
+<a>อัลบั้ม 2</a>
+<a>แนะแนว</a>
+<a>รับน้อง</a>
+<a>วิดีโอ</a>
+</div>
+</div>
+</section> 
+
+
+<section class="album-layout">
+<!-- =========================
+     HERO SLIDER
+========================= -->
+<div class="hero">
+    <div class="section-title4">
+    อัลบั้มกิจกรรม แผนกวิชาคอมพิวเตอร์
+  </div>
+  <div class="slides">
+
+            <!-- Slide 1 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1EAjsnviqt/" target="_blank">
+        <div class="half">
+          <img src="https://drive.google.com/thumbnail?id=1BknAw1W7x_wNoweVWvhduVwBzKM0G-YE&sz=w1000" alt=""></div><div class="half">
+          <img src="https://drive.google.com/thumbnail?id=1-f8jK4vSd1mhMthRn54W6vbW3JVaCyHe&sz=w1000" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 1 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/18D783XLj1/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1ldBgLNA_nJ9d0e-GTHNFf_pzWGNg9f9r" alt=""></div><div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1aWRfXWrWz7rbMqqf5Z5S5XIfYKEl5SL_" alt="">
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/17pL3oyHjG/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1rU0kiYXog94Qa1_Uwd-PfmyQgYnDgsYs" alt=""></div><div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1I1Q-eJgWjiwnanffI8xeRHPKFU-Tl53k" alt="">
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1ATb7uzfnd/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1xBF80XmkcvCp09Oc0BHfBO_WzUI7FYK_" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1c1Pl0OybfMTLzpBsZccwo1H_KE9ty8ds" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 3 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1AVXe1X6Nb/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1CPpKo97NwzOTsi_461Vkze8d2C_6zVe1" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1Mf0G6b6mGgyAT2uXciLtZv8Rzy51O4g8" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 4 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1GaRwEouma/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1MDV3V_H1of4NZ17lEGPIw8-FlMdumD13" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1MRI-6mx0SsmB9HFkBPBKBsTrsKipjrrd" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 5 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1ATpCTwxGj/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1wzEiazU1l1WsJbGgPS-KH9ddFjAB0cHl" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1REyQh5Mb4gBuNXruOd_CjgDg8zVmOtOS" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 6 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1Ar5XAnrjh/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1VQ__uSSmWOTqkz66qTuPSTu2KB2-kV-I" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1WL5ws5vJ0YrOzlMf6Sq43s-SlvSqz4UI" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 7 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1HiH2pPVXG/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/15VkO_q9F9T5sptCWvR6k5QLaDveZdqVq" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/12sag-rwFo4z6ue7T2y-fAvHN0EAAmB1f" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 8 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1Aff26QAsR/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1dHE8-C4p_qVQr31wd4aRI0Md5DxM3Ikd" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1WDqTmsRZ08gFLYcEgPhhFTl-Dy5T_gAX" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 9 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1DNJ8JbLAb/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1vKX3QcVRjh0re0FY3jWtWamzZmt8VfAB" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1FxnH9qqHj6gM-tggcaz-8DRauJMk1Orh" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 10 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1AEnixJqqb/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1sVgy_I4CcVGY04-9fP0-WbIgZQbSc0ST" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/15b9Qnx4dD-ql4dWVHS29Zk6u8_AltkS5" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 11 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1D2fYygx4u/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1QNAnUqayf_Fnsg63WEloxSwvVXPRBmIj" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1YnBg-iFfkJZbvLGTz-bG6VNQFpTWYj_Y" alt="">
+        </div>
+      </a>
+    </div>
+
+        <!-- Slide 12 -->
+    <div class="slide">
+      <a href="https://www.facebook.com/share/p/1FnXg3joJp/" target="_blank">
+        <div class="half">
+          <img src="https://lh3.googleusercontent.com/d/1hw7S0NiC5X4G9DSCycTX23dms3ndND6X" alt=""></div><div class="half"> 
+            <img src="https://lh3.googleusercontent.com/d/1BMfc8F5pHxh0TywUJsUY6SZt86LOpw2p" alt="">
+        </div>
+      </a>
+    </div>
+
+  </div>
+  
+
+  <button class="nav prev">&#10094;</button>
+  <button class="nav next">&#10095;</button>
+</div>
+
+
+
+<div class="right">
+ <div class="section-title">
+    กิจกรรมแนะแนว แผนกวิชาคอมพิวเตอร์
+  </div>
+
+  <div class="small-slider"> 
+    <div class="small-slides">
+
+      <!-- Slide 1 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1BoUeFrYQW/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/15-kL1rRPab_a-fsXHZMQFKjbBKnM3zpG">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1yJdoToubtmm_iILLCNbmJ94Vg-gEsLz1">
+          </div>
+        </a>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1G8C4bb8tt/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/11my8oX_FEg2oPgNYbNOs2EYOErGp7f4R">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/13Lhml34g3kitI_-JINxOfwBhMfP5FU80">
+          </div>
+        </a>
+      </div>
+            <!-- Slide 3 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1D2geRb3K1/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1JgZammYhB8yCfCYWfTeT5Aa2U1u6_6_-">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1E0LgwxEB91tm8JBbjGdgzUfmOj-q-yX6">
+          </div>
+        </a>
+      </div>
+            <!-- Slide 4 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1AHXwVv2fw/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1sDSaXz9jYHTdNjsnAItV3cno0SfzoGEb">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1M3_RG3dOesrtpvCEvEtJ1LBM-5ia6tPv">
+          </div>
+        </a>
+      </div>
+            <!-- Slide 5 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/14QZLfpXa13/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1t1GrT2rFmPP3zaVeiLd3YrmRD9pcu50a">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1Khv0Um_26T_URLq67K6kfqxzhamaeeuo">
+          </div>
+        </a>
+      </div>
+            <!-- Slide 6 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1C9Zj45iAg/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1khWmkjgOV_XNUWaR_dNWSY8_krBe0dQa">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1qIQ9ZOyXgVkwOVgUp3V9XZ3isD2BFvE7">
+          </div>
+        </a>
+      </div>
+            <!-- Slide 7 -->
+      <div class="small-slide">
+        <a href="https://www.facebook.com/share/p/1CLjpy635A/" target="_blank">
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1v1WEGD2MR3ANPzQwx5zKUdXTNa75RqNv">
+          </div>
+          <div class="half">
+            <img src="https://lh3.googleusercontent.com/d/1dj28l5d6We3SK3oSvuN7sENk1g7d9RIb">
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <button class="small-prev">&#10094;</button>
+    <button class="small-next">&#10095;</button>
+
+  </div>
+
+</section>
+
+<section class="album-full">
+
+  <div class="section-title5">
+    กิจกรรมเลือกตั้งนายกองค์การนักวิชาชีพในอนาคตแห่งประเทศไทย วิทยาลัยเทคนิคบัวใหญ่
+  </div>
+
+  <div class="slider3" id="slider3">
+    <div class="slides3" id="slides3">
+      <div class="slide3">
+        <img src="https://lh3.googleusercontent.com/d/1xluXWn6ISKTtRBPU16IGD-38vKvfqeA4">
+      </div>
+    </div>
+  </div>
+
+    <div class="section-title6">
+    กิจกรรมสานสัมพันธ์พี่สู่น้อง ประจำปีการศึกษา 2568
+  </div>
+
+  <div class="slider4" id="slider4">
+    <div class="slides4" id="slides4">
+      <div class="slide4">
+        <img src="https://drive.google.com/thumbnail?id=1h_5hhPBKyX-C1t5UweOMkM7elAW3OYPz&sz=w1000">
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section>
+<!-- =========================
+     SECTION กลาง
+========================= -->
+<section>
+
+<div class="activity-layout">
+
+  <!-- ฝั่งซ้าย Freshy -->
+  <div class="freshy-section">
+
+    <div class="red-box">
+      <img src="https://lh3.googleusercontent.com/d/1Z_TqiXfgy-OIahQ1K_uTkk5z7qXTx7_e" alt="banner">
+    </div>
+
+    <div class="grid-9-16">
+
+      <div class="v-slider"> 
+        <div class="v-slides">
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1YJCjSOY_upwMSDuw6zpnTCCLpjLiWpPw"></div>
+        </div>
+      </div>
+
+      <div class="v-slider">
+        <div class="v-slides">
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/11A4E_RhicjlxzXNK72dPNQRZL3Qb5K86"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1bkNDFVwvZ67Lu-54kw6k5s7ZRjfHuuBZ"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1BGfMhJ1hFjGlBjPNuVXmhfQWyFIgUEi7"></div>
+        </div>
+        <button class="v-prev">&#10094;</button>
+        <button class="v-next">&#10095;</button>
+      </div>
+
+      <div class="v-slider">
+        <div class="v-slides">
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1YAsvSfPv62w6EDOM5FNBrm8koRiH_paC"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1MkQzL5utyzCsTwyvPgdXVfNlTEE1o8jQ"></div>
+        </div>
+        <button class="v-prev">&#10094;</button>
+        <button class="v-next">&#10095;</button>
+      </div>
+
+      <div class="v-slider"> 
+        <div class="v-slides">
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1Vs2qI-BEraLUl_XJ_nDQKy7-Cq0dt51L"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/18gLSvoK2rQW7wmRTgToylLG9_P6YgpSF"></div>
+        </div>
+        <button class="v-prev">&#10094;</button>
+        <button class="v-next">&#10095;</button>
+      </div>
+
+      <div class="v-slider"> 
+        <div class="v-slides">
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/10NgaY-G2875jzNpELr_oSI4vp0vyJLPF"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1gFfQsONt9jG75AsBjh920BXvtHc5dVAn"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1Ae6wfHU1WMExenyfMTvepOhbK0tgAp-U"></div>
+          <div class="v-slide"><img src="https://lh3.googleusercontent.com/d/1ZPgAuDomoHrTRUQowgWxE6VoE3_SaVG0"></div>
+        </div>
+        <button class="v-prev">&#10094;</button>
+        <button class="v-next">&#10095;</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ฝั่งขวา Album แนวตั้ง -->
+  <div class="album-section">
+
+    <div class="section-title2">
+      อัลบั้มกิจกรรม แผนกวิชาคอมพิวเตอร์
+    </div>
+
+    <div class="vertical-slider">
+      <div class="vertical-slides">
+
+          <!-- Album 1 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1LyGrxyVNA/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1DC6VRclLP17Ko4cgTwbdCyk3ZahQjo1U">
+        <img src="https://lh3.googleusercontent.com/d/1XQnEghGCC6veTX3LSdgQRxJkxtVZhYxw">
+      </a>
+    </div>
+
+    <!-- Album 2 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/14XgjMvtZBu/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/16JJlVFIpm-DGAcLbVLThFCnlEB3ZYpM5">
+        <img src="https://lh3.googleusercontent.com/d/1o3j3adiqw1Quyye_RW_w3RSz-_pUQWlX">
+      </a>
+    </div>
+
+        <!-- Album 3 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1ArQQbU5oY/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1wdKVGb_jFAJxU55AWKwEUI5f0yybJQ2h">
+        <img src="https://lh3.googleusercontent.com/d/1TFGahATb-Ib8Hg5TXXpB0_rm0MRzHlFT">
+      </a>
+    </div>
+
+        <!-- Album 4 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1CKq5HDMHq/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1xa10QKEmyswsC5jxZ9Gy9I972bPHKO3O">
+        <img src="https://lh3.googleusercontent.com/d/1TWiHGDYz1jgjfVL1zOcW8asuiHts2_RD">
+      </a>
+    </div>
+
+        <!-- Album 5 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/16DPqd4gBX/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1TcnkKX0Dlp_3rq6kYMHycXHxIQgFkY7_">
+        <img src="https://lh3.googleusercontent.com/d/1Kwabzny10uU-dgEcarf_cHQhIvjJCWZG">
+      </a>
+    </div>
+
+        <!-- Album 6 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/18NmzjjTYK/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1SFAmkq-lsdNWacvenHfvvYTNxwvPKNjh">
+        <img src="https://lh3.googleusercontent.com/d/18w3Ffm84bFFUFgSsDbeZPY24IQSfs23m">
+      </a>
+    </div>
+
+        <!-- Album 7 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1CUDToZqHh/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1No0gjIGiP-ZgDybzJaopBZjdgkSX-00P">
+        <img src="https://lh3.googleusercontent.com/d/1IyVU-K5OwhSGVrbLJO42lz1xNPYD64FB">
+      </a>
+    </div>
+
+            <!-- Album 8 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/18GjnjjYQu/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1sSXozduua-y2D2aThVhjevfVOKnrfRNg">
+        <img src="https://lh3.googleusercontent.com/d/1GkWMOWrkdxjU0YmcT5-Jw2PrA7ksQ3QQ">
+      </a>
+    </div>
+
+            <!-- Album 9 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1afw3zcQz4/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/119Tb4287nPskNyyWfZnj2oCcA8ZGJnkq">
+        <img src="https://lh3.googleusercontent.com/d/1f_yhTDw0SEiqI8DpwnLRspWtAsJnXh7T">
+      </a>
+    </div>
+               <!-- Album 10 -->
+    <div class="vertical-slide">
+      <a href="https://www.facebook.com/share/p/1C5oB7qUbx/" target="_blank">
+        <img src="https://lh3.googleusercontent.com/d/1Vvpr6c_55oHWpL_Pe1MARyWW7BXueKx_">
+        <img src="https://lh3.googleusercontent.com/d/1_yxel6pMwd7juDKY66TJuuCRe1LT96yw">
+      </a>
+    </div>
+      </div>
+
+           <button class="vertical-prev">&#10094;</button>
+  <button class="vertical-next">&#10095;</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+</div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-column">
+      <h3>เมนูหลัก</h3>
+      <a href="#">หน้าแรก</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ผลงาน</h3>
+      <a href="#">โครงงาน</a>
+      <a href="activity.html">กิจกรรม</a>
+      <a href="portfolio.html">รางวัล</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ระบบ</h3>
+      <a href="#">แดชบอร์ด</a>
+      <a href="#">ตั้งค่าบัญชี</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>ติดต่อ</h3>
+      <a href="teacher.html">ติดต่อครู</a>
+      <a href="map.html">แผนที่</a>
+      <a href="#">ช่องทางออนไลน์</a>
+      <a href="#">คำถามที่พบบ่อย</a>
+    </div>
+
+  </div>
+</footer>
+
+
+
+
+
+
+
+<script>
+
+  fetch("components/header.html")
+  .then(res => res.text())
+  .then(data => {
+      document.getElementById("header").innerHTML = data;
+
+      const header = document.querySelector("header");
+
+      window.addEventListener("scroll", function() {
+        if (!header) return;
+
+        if (window.scrollY > 10) {
+          header.classList.add("active");   // 👈 ใช้ active
+        } else {
+          header.classList.remove("active");
+        }
+      });
+  })
+  .catch(error => console.error(error));
+
+const tabs = document.querySelectorAll(".album-menu a");
+const slider = document.querySelector(".slider");
+
+let index = 0;
+
+function moveSlider(tab){
+slider.style.width = tab.offsetWidth + "px";
+slider.style.left = tab.offsetLeft + "px";
+}
+
+function autoSlide(){
+
+tabs.forEach(t => t.classList.remove("active"));
+
+tabs[index].classList.add("active");
+
+moveSlider(tabs[index]);
+
+index++;
+
+if(index >= tabs.length){
+index = 0;
+}
+
+}
+
+window.onload = () => {
+moveSlider(tabs[0]);
+
+setInterval(autoSlide,2000); // 2 วิ
+}
+
+  /* ===============================
+     TOGGLE MENU
+  =============================== */
+  function toggleMenu() {
+    document.body.classList.toggle("menu-open");
+  }
+  window.toggleMenu = toggleMenu;
+
+
+  /* ===============================
+     HERO SLIDER
+  =============================== */
+  const slides = document.querySelector('.slides');
+  const slideItems = document.querySelectorAll('.slide');
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+  const hero = document.querySelector('.hero');
+
+  if (slides && slideItems.length > 1) {
+
+    let index = 0;
+    let auto;
+
+    function updateSlide(){
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function startAuto(){
+      auto = setInterval(()=>{
+        index = (index + 1) % slideItems.length;
+        updateSlide();
+      },5000);
+    }
+
+    function stopAuto(){
+      clearInterval(auto);
+    }
+
+    if(next){
+      next.addEventListener('click',()=>{
+        index = (index + 1) % slideItems.length;
+        updateSlide();
+      });
+    }
+
+    if(prev){
+      prev.addEventListener('click',()=>{
+        index = (index - 1 + slideItems.length) % slideItems.length;
+        updateSlide();
+      });
+    }
+
+    if(hero){
+      hero.addEventListener('mouseenter',stopAuto);
+      hero.addEventListener('mouseleave',startAuto);
+    }
+
+    document.addEventListener("visibilitychange", function(){
+      if(document.hidden){
+        stopAuto();
+      } else {
+        startAuto();
+      }
+    });
+
+    startAuto();
+  }
+
+
+/* ===============================
+   VERTICAL SLIDER (FRESHY)
+=============================== */
+
+document.querySelectorAll(".v-slider").forEach(slider => {
+
+  const slides = slider.querySelector(".v-slides");
+  const items = slider.querySelectorAll(".v-slide");
+  const prev = slider.querySelector(".v-prev");
+  const next = slider.querySelector(".v-next");
+
+  let index = 0;
+  let auto;
+
+  function update(){
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function start(){
+    auto = setInterval(()=>{
+      index = (index + 1) % items.length;
+      update();
+    },4000);
+  }
+
+  function stop(){
+    clearInterval(auto);
+  }
+
+  if(next){
+    next.addEventListener("click", ()=>{
+      index = (index + 1) % items.length;
+      update();
+    });
+  }
+
+  if(prev){
+    prev.addEventListener("click", ()=>{
+      index = (index - 1 + items.length) % items.length;
+      update();
+    });
+  }
+
+  slider.addEventListener("mouseenter", stop);
+  slider.addEventListener("mouseleave", start);
+
+  start();
+
+});
+
+
+ /* ===============================
+     SMALL SLIDER
+  =============================== */
+  const smallSlides = document.querySelector('.small-slides');
+  const smallItems = document.querySelectorAll('.small-slide');
+  const smallPrev = document.querySelector('.small-prev');
+  const smallNext = document.querySelector('.small-next');
+  const smallSlider = document.querySelector('.small-slider');
+
+  if (smallSlides && smallItems.length > 1) {
+
+    let smallIndex = 0;
+    let smallAuto;
+
+    function updateSmall(){
+      smallSlides.style.transform =
+        `translateX(-${smallIndex * 100}%)`;
+    }
+
+    function startSmall(){
+      smallAuto = setInterval(()=>{
+        smallIndex = (smallIndex + 1) % smallItems.length;
+        updateSmall();
+      },5000);
+    }
+
+    function stopSmall(){
+      clearInterval(smallAuto);
+    }
+
+    if(smallNext){
+      smallNext.addEventListener('click',()=>{
+        smallIndex = (smallIndex + 1) % smallItems.length;
+        updateSmall();
+      });
+    }
+
+    if(smallPrev){
+      smallPrev.addEventListener('click',()=>{
+        smallIndex =
+          (smallIndex - 1 + smallItems.length) %
+          smallItems.length;
+        updateSmall();
+      });
+    }
+
+    if(smallSlider){
+      smallSlider.addEventListener('mouseenter',stopSmall);
+      smallSlider.addEventListener('mouseleave',startSmall);
+    }
+
+    document.addEventListener("visibilitychange", function(){
+      if(document.hidden){
+        stopSmall();
+      } else {
+        startSmall();
+      }
+    });
+
+    startSmall();
+  }
+
+/* ===============================
+   RIGHT VERTICAL SLIDER
+=============================== */
+const vMain = document.querySelector('.vertical-slider');
+const vSlidesMain = document.querySelector('.vertical-slides');
+const vItemsMain = document.querySelectorAll('.vertical-slide');
+const vPrevMain = document.querySelector('.vertical-prev');
+const vNextMain = document.querySelector('.vertical-next');
+
+if (vSlidesMain && vItemsMain.length > 1) {
+
+  let vIndexMain = 0;
+  let vAutoMain;
+
+  function updateVMain(){
+    vSlidesMain.style.transform =
+      `translateX(-${vIndexMain * 100}%)`;
+  }
+
+  function startVMain(){
+    vAutoMain = setInterval(()=>{
+      vIndexMain = (vIndexMain + 1) % vItemsMain.length;
+      updateVMain();
+    },4000);
+  }
+
+  function stopVMain(){
+    clearInterval(vAutoMain);
+  }
+
+  if(vNextMain){
+    vNextMain.addEventListener('click',()=>{
+      vIndexMain =
+        (vIndexMain + 1) % vItemsMain.length;
+      updateVMain();
+    });
+  }
+
+  if(vPrevMain){
+    vPrevMain.addEventListener('click',()=>{
+      vIndexMain =
+        (vIndexMain - 1 + vItemsMain.length) %
+        vItemsMain.length;
+      updateVMain();
+    });
+  }
+
+  if(vMain){
+    vMain.addEventListener('mouseenter',stopVMain);
+    vMain.addEventListener('mouseleave',startVMain);
+  }
+
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden){
+      stopVMain();
+    } else {
+      startVMain();
+    }
+  });
+
+  startVMain();
+}
+
+
+</script>
+
+</body>
+</html>

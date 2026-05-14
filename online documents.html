@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/license.png">
+
+
+
+<title>EEXIT</title>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
+/* ===== INTRO ===== */
+
+#intro{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:#020617;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+z-index:9999;
+
+animation:introFade 1s ease 4s forwards;
+
+}
+
+.intro-box{
+
+display:flex;
+
+align-items:center;   /* จัดกลางแนวตั้ง */
+justify-content:center;
+
+gap:20px;
+
+}
+
+.intro-text{
+
+margin-top:-50px;
+font-size:50px;
+font-weight:700;
+
+display:flex;
+align-items:center;   /* จัดกลางกับโลโก้ */
+
+background:linear-gradient(90deg,#00e5ff,#0084ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+
+}
+
+/* ===== LOGO ===== */
+
+.intro-logo{
+height:80px;
+opacity:0;
+animation:logoShow 1s ease forwards;
+}
+
+/* ===== TEXT ===== */
+
+.intro-text{
+
+font-size:50px;
+font-weight:700;
+
+margin-top:-10px;
+
+background:linear-gradient(90deg,#00e5ff,#0084ff);
+background-clip:text;
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* ===== LOGO APPEAR ===== */
+
+@keyframes logoShow{
+
+0%{
+opacity:0;
+transform:translateY(30px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* ===== BOUNCE ===== */
+
+.bounce{
+
+animation:bounce .5s ease;
+}
+
+@keyframes bounce{
+
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
+
+}
+
+/* ===== FADE ===== */
+
+@keyframes introFade{
+
+to{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+/* ===== FONT ===== */
+
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Light.woff2') format('woff2');
+font-weight:300;
+}
+
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Bold.woff2') format('woff2');
+font-weight:700;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'FCVision',sans-serif;
+}
+
+/* ===== VIDEO BG ===== */
+
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+/* ===== OVERLAY ===== */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* ===== BODY ===== */
+
+body{
+height:100vh;
+display:flex;
+flex-direction:column;
+color:white;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar{
+display:flex;
+align-items:center;
+padding:30px 80px;
+}
+
+/* โลโก้ + ตัวหนังสือ */
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:26px;
+font-weight:700;
+}
+
+.logo img{
+height:32px;
+}
+
+.logo span{
+background:linear-gradient(90deg,#00e5ff,#ff4dd2);
+background-clip:text;
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+flex:1;
+display:flex;
+align-items:center;
+padding:0 120px;
+margin-top: -50px;
+}
+
+/* ===== LEFT ===== */
+
+.left{
+width:50%;
+}
+
+/* ===== TITLE ===== */
+
+.title-main{
+font-size:120px;
+font-weight:700;
+background:linear-gradient(90deg,#0af3ff,#0084ff);
+background-clip:text;
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.title-sub{
+font-size:40px;
+font-weight:700;
+margin-top: -20px;
+}
+
+.subtitle{
+margin-top: 5px;
+color:#aaa;
+}
+
+/* ===== MENU ===== */
+
+.menu{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+gap:15px;
+width:400px;
+}
+
+/* ===== BUTTON ===== */
+
+.menu button{
+
+width:100%;
+
+padding:20px;
+
+border-radius:50px;
+
+border:1px solid rgba(255,255,255,0.25);
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+
+color:white;
+
+font-size:18px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:all .3s ease;
+
+box-shadow:0 8px 30px rgba(0,0,0,.4);
+
+}
+
+.menu button:hover{
+
+background:rgba(255,255,255,0.15);
+
+transform:translateY(-4px);
+
+}
+
+/* ===== LOGIN ===== */
+
+.login{
+margin-top:40px;
+}
+
+#user{
+margin-bottom:10px;
+font-size:14px;
+}
+
+/* ===== GOOGLE BUTTON ===== */
+
+.google-btn{
+
+width:300px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:10px;
+
+padding:16px;
+
+border-radius:40px;
+
+border:none;
+
+font-size:16px;
+font-weight:700;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#007206,#0365c0);
+
+transition:.3s;
+
+}
+
+.google-btn img{
+width:22px;
+}
+
+.google-btn:hover{
+transform:translateY(-4px);
+}
+
+.logout-btn{
+background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+
+<div class="intro-box">
+
+<img src="img/eexit.png" class="intro-logo">
+
+<div class="intro-text">
+<span id="typing"></span>
+</div>
+
+</div>
+
+</div>
+
+<!-- VIDEO BACKGROUND -->
+
+<video autoplay muted loop playsinline class="video-bg">
+<source src="video/8888.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+<img src="img/eexit.png">
+<span>EEXIT</span>
+</div>
+
+</div>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="left">
+
+<div class="title-main">EEXIT</div>
+<div class="title-sub">ONLINE SYSTEM</div>
+
+<div class="subtitle">
+#สะดวก #รวดเร็ว #ใช้ง่าย #ปลอดภัย
+</div>
+
+<div class="menu">
+
+<button onclick="openLeave()"  > 
+ใบขออนุญาตออนไลน์
+</button>
+
+<button onclick="openPermission()">
+ใบลาออนไลน์
+</button>
+
+</div>
+
+<div class="login">
+
+<div id="user"></div>
+
+<button class="google-btn" id="loginBtn" onclick="googleLogin()">
+<img src="img/google.png" id="googleIcon">
+<span id="loginText">เข้าสู่ระบบด้วย Google</span>
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* LOGIN */
+
+function googleLogin(){
+
+let user = localStorage.getItem("user")
+
+if(user){
+
+localStorage.removeItem("user")
+
+document.getElementById("user").innerHTML=""
+
+let btn=document.getElementById("loginBtn")
+
+btn.classList.remove("logout-btn")
+
+btn.innerHTML='<img src="img/google.png"> เข้าสู่ระบบด้วย Google'
+
+return
+}
+
+const client = google.accounts.oauth2.initTokenClient({
+
+client_id:"521653872278-8snnvcov1j4qm0kaal1cv8gtfj2khkre.apps.googleusercontent.com",
+
+scope:"email profile",
+
+callback:(response)=>{
+
+fetch("https://www.googleapis.com/oauth2/v3/userinfo",{
+headers:{Authorization:"Bearer "+response.access_token}
+})
+.then(res=>res.json())
+.then(data=>{
+
+if(!data.email.endsWith("@bic.ac.th")){
+alert("กรุณาใช้บัญชีวิทยาลัย @bic.ac.th เท่านั้น")
+return
+}
+
+localStorage.setItem("user",data.email)
+
+document.getElementById("user").innerHTML="👤 "+data.email
+
+let btn=document.getElementById("loginBtn")
+
+btn.classList.add("logout-btn")
+
+btn.innerHTML="ออกจากระบบ"
+
+})
+
+}
+
+})
+
+client.requestAccessToken()
+
+}
+
+/* CHECK LOGIN */
+
+function checkLogin(){
+
+let user=localStorage.getItem("user")
+
+if(user){
+
+document.getElementById("user").innerHTML="👤 "+user
+
+let btn=document.getElementById("loginBtn")
+
+btn.classList.add("logout-btn")
+
+btn.innerHTML="ออกจากระบบ"
+
+}
+
+}
+
+checkLogin()
+
+/* MENU */
+
+function openLeave(){
+
+if(!localStorage.getItem("user")){
+alert("กรุณา Login ก่อน")
+return
+}
+
+window.location="https://docs.google.com/forms/d/e/1FAIpQLSft04iCt5YNNv_NXn5kd30pZzugMuf3VfA51cPM30ymQzR_zg/viewform"
+
+}
+
+function openPermission(){
+
+if(!localStorage.getItem("user")){
+alert("กรุณา Login ก่อน")
+return
+}
+
+window.location="#"
+
+}
+
+
+
+const text = "EEXIT";
+let i = 0;
+
+function typeEffect(){
+
+if(i < text.length){
+
+document.getElementById("typing").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typeEffect,120);
+
+}else{
+
+// เด้งเมื่อพิมพ์เสร็จ
+
+document.querySelector(".intro-box").classList.add("bounce");
+
+}
+
+}
+
+// เริ่มพิมพ์หลังโลโก้ขึ้น
+
+setTimeout(typeEffect,800);
+
+
+</script>
+
+</body>
+</html>

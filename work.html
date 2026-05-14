@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบติดตามสถานะฝึกงาน</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+
+<style>
+
+/* ===== FONT ===== */
+
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Light.woff2') format('woff2');
+font-weight:300;
+}
+@font-face{
+font-family:'FCVision';
+src:url('fonts/FCVision-Bold.woff2') format('woff2');
+font-weight:700;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'FCVision',sans-serif;
+}
+
+/* ===== BODY ===== */
+
+body{
+background: radial-gradient(circle at top, #1e293b, #020617 80%);
+color:white;
+}
+
+/* ===== HEADER ===== */
+
+.header1{
+margin-top: 80px;
+padding: 20px;
+font-size:22px;
+font-weight:bold;
+background: linear-gradient(90deg,#0f172a,#1e293b);
+border-bottom:1px solid #1e293b;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* ===== STATS ===== */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.stat{
+background: linear-gradient(145deg,#1e293b,#0f172a);
+padding:20px;
+border-radius:15px;
+position:relative;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.05);
+transition:.3s;
+}
+
+.stat:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.stat::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#3b82f6,#06b6d4);
+}
+
+.stat h2{
+margin-top:10px;
+font-size:28px;
+}
+
+/* ===== FILTER ===== */
+
+.filters{
+display:flex;
+gap:10px;
+padding:15px;
+background:#111827;
+border-bottom:1px solid #1e293b;
+flex-wrap:wrap;
+}
+
+.filters input,
+.filters select{
+padding:10px;
+border-radius:8px;
+border:1px solid #334155;
+background:#020617;
+color:white;
+transition:.2s;
+}
+
+.filters input:focus,
+.filters select:focus{
+outline:none;
+border-color:#3b82f6;
+box-shadow:0 0 10px rgba(59,130,246,0.5);
+}
+
+/* ===== TABLE ===== */
+
+.tableContainer{
+padding:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#020617;
+border-radius:10px;
+overflow:hidden;
+}
+
+thead{
+background:#111827;
+}
+
+th,td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid #1e293b;
+}
+
+tbody tr{
+transition:.2s;
+}
+
+tbody tr:hover{
+background:rgba(59,130,246,0.15);
+transform:scale(1.01);
+cursor:pointer;
+}
+
+/* ===== STATUS ===== */
+
+.status{
+padding:5px 12px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
+}
+
+.green{
+background:rgba(34,197,94,0.2);
+color:#22c55e;
+}
+
+.red{
+background:rgba(239,68,68,0.2);
+color:#ef4444;
+}
+
+.blue{
+background:rgba(59,130,246,0.2);
+color:#3b82f6;
+}
+
+/* ===== NAME ===== */
+
+.nameCell{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.avatar{
+width:32px;
+height:32px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 4px 12px rgba(0,0,0,0.5);
+border:2px solid rgba(255,255,255,0.1);
+}
+
+.modal-avatar{
+width:80px;
+height:80px;
+border-radius:50%;
+object-fit:cover;
+margin:auto;
+margin-bottom:15px;
+display:block;
+box-shadow:0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-box{
+width:380px;
+padding:35px;
+border-radius:20px;
+background:linear-gradient(145deg,#0f172a,#020617);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 20px 60px rgba(0,0,0,0.7),
+inset 0 1px 0 rgba(255,255,255,0.05);
+text-align:center;
+animation:popup .3s ease;
+}
+
+@keyframes popup{
+from{transform:scale(.9);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.modal-box button{
+margin-top:18px;
+padding:10px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+color:white;
+cursor:pointer;
+}
+
+/* ===== SCROLLBAR ===== */
+
+::-webkit-scrollbar{
+height:6px;
+width:6px;
+}
+::-webkit-scrollbar-thumb{
+background:#334155;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+  <!-- โหลด overlay login -->
+<div id="loginContainer"></div>
+
+<script>
+fetch('login.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('loginContainer').innerHTML = data;
+  })
+  .catch(console.error);
+</script>
+
+<script src="js/login.js" defer></script>
+
+    <div id="header"></div>
+
+<div class="header1">
+ระบบติดตามสถานะการฝึกงานนักเรียน
+</div>
+
+<div class="stats">
+<div class="stat">นักเรียนทั้งหมด<h2 id="total">0</h2></div>
+<div class="stat">กำลังฝึกงาน<h2 id="working">0</h2></div>
+<div class="stat">มีปัญหา<h2 id="problem">0</h2></div>
+<div class="stat">ฝึกงานเสร็จ<h2 id="finish">0</h2></div>
+</div>
+
+<div class="filters">
+<input type="text" id="search" placeholder="ค้นหานักเรียน">
+<select id="branch"><option value="">สาขาทั้งหมด</option></select>
+<select id="level"><option value="">ระดับชั้นทั้งหมด</option></select>
+<select id="room"><option value="">ห้องทั้งหมด</option></select>
+</div>
+
+<div class="tableContainer">
+<table>
+<thead>
+<tr>
+<th>นักเรียน</th>
+<th>ระดับ</th>
+<th>สาขา</th>
+<th>บริษัท</th>
+<th>ครูนิเทศ</th>
+<th>สถานะ</th>
+</tr>
+</thead>
+<tbody id="studentTable"></tbody>
+</table>
+</div>
+
+<div id="modal" class="modal">
+<div class="modal-box">
+<div id="modalContent"></div>
+<button onclick="closeModal()">ปิด</button>
+</div>
+</div>
+
+
+
+
+<script>
+
+    /* ===== LOAD HEADER ===== */
+
+fetch("components/header.html")
+.then(res => res.text())
+.then(data => {
+
+  document.getElementById("header").innerHTML = data;
+
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+
+    if(!header) return;
+
+    if(window.scrollY > 10){
+      header.classList.add("active");
+    }else{
+      header.classList.remove("active");
+    }
+
+  });
+
+})
+.catch(error => console.error(error));
+
+function getDriveImage(url){
+if(!url) return "";
+
+let match = url.match(/[-\w]{25,}/);
+
+if(match){
+return "https://drive.google.com/thumbnail?id=" + match[0] + "&sz=w200";
+}
+
+return "";
+}
+
+const API_URL="https://script.google.com/macros/s/AKfycbznj4Em5Kf4Fj_8Aw8dYMvWMY5976WPotfREwxWYJl04SjV8-f7ogbMewpxDKRjUaM1/exec";
+
+let students=[];
+
+async function loadData(){
+const res=await fetch(API_URL);
+students=await res.json();
+updateStats(students);
+createFilters(students);
+applyFilter();
+}
+
+loadData();
+
+function createFilters(data){
+createSelect("branch","สาขาวิชา",data);
+createSelect("level","ระดับชั้น",data);
+createSelect("room","ห้อง",data);
+}
+
+function createSelect(id,key,data){
+const select=document.getElementById(id);
+if(select.dataset.loaded) return;
+[...new Set(data.map(s=>s[key]))].forEach(v=>{
+if(v) select.innerHTML+=`<option>${v}</option>`;
+});
+select.dataset.loaded=true;
+}
+
+document.querySelectorAll("#search,#branch,#level,#room")
+.forEach(el=>{
+el.addEventListener("input",applyFilter);
+el.addEventListener("change",applyFilter);
+});
+
+function applyFilter(){
+const search=document.getElementById("search").value.toLowerCase();
+const branch=document.getElementById("branch").value;
+const level=document.getElementById("level").value;
+const room=document.getElementById("room").value;
+
+const filtered=students.filter(s=>
+(!search || (s["ชื่อ - นามสกุล"]||"").toLowerCase().includes(search)) &&
+(!branch || s["สาขาวิชา"]===branch) &&
+(!level || s["ระดับชั้น"]===level) &&
+(!room || s["ห้อง"]===room)
+);
+
+renderTable(filtered);
+}
+
+function renderTable(data){
+let html="";
+data.forEach((s,index)=>{
+
+let statusClass="green";
+if(s["สถานะ"]==="มีปัญหา") statusClass="red";
+if(s["สถานะ"]==="ฝึกงานเสร็จ") statusClass="blue";
+
+html+=`
+<tr onclick="openModal(${index})">
+<td>
+<div class="nameCell">
+<img class="avatar" src="${getDriveImage(s["แนบรูปของตนเอง"])}">
+${s["ชื่อ - นามสกุล"]}
+</div>
+</td>
+<td>${s["ระดับชั้น"]||""} ${s["ห้อง"]||""}</td>
+<td>${s["สาขาวิชา"]||"-"}</td>
+<td>${s["บริษัทที่ฝึกงาน"]||"-"}</td>
+<td>${s["ครูนิเทศ"]||"-"}</td>
+<td><span class="status ${statusClass}">${s["สถานะ"]||"-"}</span></td>
+</tr>`;
+});
+
+document.getElementById("studentTable").innerHTML=html;
+}
+
+function updateStats(data){
+document.getElementById("total").innerText=data.length;
+document.getElementById("working").innerText=data.filter(s=>s["สถานะ"]==="กำลังฝึกงาน").length;
+document.getElementById("problem").innerText=data.filter(s=>s["สถานะ"]==="มีปัญหา").length;
+document.getElementById("finish").innerText=data.filter(s=>s["สถานะ"]==="ฝึกงานเสร็จ").length;
+}
+
+function openModal(index){
+
+const s = students[index];
+
+document.getElementById("modal").style.display="flex";
+
+document.getElementById("modalContent").innerHTML=`
+
+<img class="modal-avatar"
+src="${getDriveImage(s["แนบรูปของตนเอง"])}">
+
+<h2>${s["ชื่อ - นามสกุล"]}</h2>
+
+<div class="modal-info">
+
+<p><b>รหัสนักศึกษา :</b> ${s["รหัสนักศึกษา"] || "-"}</p>
+
+<p><b>ระดับ :</b> ${s["ระดับชั้น"] || "-"}</p>
+
+<p><b>ห้อง :</b> ${s["ห้อง"] || "-"}</p>
+
+<p><b>สาขา :</b> ${s["สาขาวิชา"] || "-"}</p>
+
+<hr>
+
+<p><b>บริษัทที่ฝึกงาน :</b> ${s["บริษัทที่ฝึกงาน"] || "-"}</p>
+
+<p><b>ที่อยู่บริษัท :</b> ${s["ที่อยู่บริษัท"] || "-"}</p>
+
+<p><b>เบอร์โทรบริษัท :</b> ${s["เบอร์โทรบริษัท/ผู้ควบคุมการฝึกงาน"] || "-"}</p>
+
+<hr>
+
+<p><b>ครูนิเทศ :</b> ${s["ครูนิเทศ"] || "-"}</p>
+
+<p><b>วันที่เริ่มฝึก :</b> ${formatDate(s["วันที่เริ่มฝึก"])}</p>
+
+<p><b>วันที่สิ้นสุดฝึก :</b> ${formatDate(s["วันที่สิ้นสุดฝึก"])}</p>
+
+<hr>
+
+<p><b>สถานะ :</b> ${s["สถานะ"] || "-"}</p>
+
+</div>
+
+`;
+}
+
+function formatDate(date){
+if(!date) return "-";
+
+let d = new Date(date);
+
+if(isNaN(d)) return date;
+
+return d.toLocaleDateString("th-TH");
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
+
